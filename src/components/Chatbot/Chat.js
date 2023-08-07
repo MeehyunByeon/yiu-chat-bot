@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { colors } from "../../assets/colors";
 
-const Header = () => {
+const Chat = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -15,4 +15,4 @@ const Header = () => {
     </div>
   );
 };
-export default Header;
+export default Chat;

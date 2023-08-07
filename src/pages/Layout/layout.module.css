@@ -1,19 +1,28 @@
-.main_container {
-  min-height: 30em;
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 70px;
+  width: 100%;
+  align-content: center;
+  display: flex;
+  justify-content: center;
 }
 
-.site-layout-content {
-  min-height: 280px;
-  padding: 24px;
+.main {
 }
-#components-layout-demo-top .logo {
-  float: left;
-  width: 120px;
-  height: 31px;
-  margin: 16px 24px 16px 0;
-  background: rgba(255, 255, 255, 0.3);
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 70px;
+  width: 100%;
+  background-color: #eeeeee;
+  display: flex;
+  justify-content: center;
 }
-.ant-row-rtl #components-layout-demo-top .logo {
-  float: right;
-  margin: 16px 0 16px 24px;
+
+li {
+  margin: 100px 0 100px 0;
 }

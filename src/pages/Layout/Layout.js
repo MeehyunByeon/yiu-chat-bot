@@ -4,16 +4,27 @@ import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 
 import styles from "./layout.module.css";
+import { colors } from "../../assets/colors";
 
 const LAYOUT = (props) => {
   const { className, children } = props;
 
   return (
     <div>
-      <Header />
-      <div className={styles.main_container}>{children}</div>
-      <hr />
-      <Footer />
+      <div
+        className={styles.header}
+        style={{ backgroundColor: colors.yiu_main, alignItems: "center" }}
+      >
+        <Header />
+      </div>
+      <div className={styles.main}>{children}</div>
+
+      {/* <div
+        className={styles.footer}
+        style={{ backgroundColor: colors.footer_bg }}
+      >
+        <Footer />
+      </div> */}
     </div>
   );
 };

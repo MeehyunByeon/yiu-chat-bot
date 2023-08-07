@@ -10,12 +10,20 @@ export default function (state = {}, action) {
     case GET_ANSWER_Q:
       return {
         ...state,
-        q: action.payload || false,
+        answer: action.payload || false,
+        // who: action.payload.who || false,
+        // top: action.payload.top || false,
+        // mid: action.payload.mid || false,
+        // bot: action.payload.bot || false,
       };
     case GET_ANSWER_C:
       return {
         ...state,
-        c: action.payload || false,
+        answer: action.payload || false,
+        // who: action.payload.who || false,
+        // top: action.payload.top || false,
+        // mid: action.payload.mid || false,
+        // bot: action.payload.bot || false,
       };
     default:
       return state;
