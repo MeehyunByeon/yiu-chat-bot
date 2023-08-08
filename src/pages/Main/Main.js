@@ -85,6 +85,15 @@ const Main = (props) => {
       });
   };
 
+  const addClientChat = () => {
+    const chat = {
+      who: "client",
+      text: chatMsg,
+    };
+    setChatList([...chatList, chat]);
+    setChatMsg("");
+  };
+
   return (
     <div>
       <Container style={{ marginTop: 100, marginBottom: 100 }}>
@@ -144,7 +153,11 @@ const Main = (props) => {
             }}
             onClick={() => {
               dispatch(req_client_question(chatMsg));
-              setChatMsg("");
+              addClientChat();
+            }}
+            onPressEnter={() => {
+              dispatch(req_client_question(chatMsg));
+              addClientChat();
             }}
           />
         </Row>

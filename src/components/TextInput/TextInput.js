@@ -28,6 +28,7 @@ const TextInput = (props) => {
         maxLength={props.maxLength}
         disabled={props.disabled}
         onChange={props.onChange}
+        onPressEnter={props.onPressEnter}
         suffix={
           <FontAwesomeIcon
             icon={faPaperPlane}
