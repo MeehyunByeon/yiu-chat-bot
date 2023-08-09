@@ -32,10 +32,10 @@ const TextInput = (props) => {
         suffix={
           <FontAwesomeIcon
             icon={faPaperPlane}
-            size={"2x"}
+            size={"xl"}
             style={{ cursor: "pointer" }}
             color={props.disabled ? colors.send_btn_disabled : colors.send_btn}
-            onClick={props.onClick}
+            onClick={props.btnDisabled == true ? null : props.onClick}
           />
         }
       />

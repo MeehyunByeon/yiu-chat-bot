@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { List, Avatar, Space, Row, Col, message } from "antd";
@@ -33,6 +33,13 @@ const Main = (props) => {
   const [chatMsg, setChatMsg] = useState("");
 
   const [messageApi, contextHolder] = message.useMessage();
+
+  // 스크롤
+  const messageEndRef = useRef();
+
+  useEffect(() => {
+    messageEndRef.current.scrollIntoView({ behavior: "smooth" });
+  }, [chatList]);
 
   // 에러메세지 함수
   const errorMsg = (data) => {
@@ -119,7 +126,6 @@ const Main = (props) => {
                     size={"2x"}
                     color={colors.yiu_main}
                     style={{
-                      padding: 10,
                       backgroundColor: "white",
                       borderRadius: 50,
                       marginRight: 20,
@@ -128,9 +134,23 @@ const Main = (props) => {
                   <ChatBotMsg data={item} />
                 </div>
               );
-            } else return <ClientMsg data={item} />;
+            } else
+              return (
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "flex-end",
+                    marginRight: 20,
+                    marginBottom: 20,
+                  }}
+                >
+                  <ClientMsg data={item} />
+                </div>
+              );
           })}
       </Container>
+      <div ref={messageEndRef}></div>
       <div
         className={styles.footer}
         style={{ backgroundColor: colors.footer_bg }}
@@ -148,6 +168,7 @@ const Main = (props) => {
             id="msg"
             name="msg"
             value={chatMsg}
+            btnDisabled={chatMsg.length > 0 ? false : true}
             onChange={(e) => {
               onChange(e);
             }}

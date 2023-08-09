@@ -11,7 +11,9 @@ const Header = () => {
 
   return (
     <div>
-      <h2 style={{ color: "white", textAlign: "center" }}>용인대학교</h2>
+      <h3 style={{ color: "white", textAlign: "center" }}>
+        용인대학교 챗봇 용용이
+      </h3>
     </div>
   );
 };
