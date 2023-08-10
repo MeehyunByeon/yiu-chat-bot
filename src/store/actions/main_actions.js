@@ -1,7 +1,7 @@
 import { WELCOME, GET_ANSWER_Q, GET_ANSWER_C } from "../types";
 import axios from "axios";
 
-import { welcome_msg } from "../../assets/data/welcom_msg";
+import { welcome_msg } from "../../assets/data/welcome_msg";
 import { test_data } from "../../assets/data/test_data";
 
 // 시작 메시지

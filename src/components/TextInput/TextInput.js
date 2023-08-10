@@ -33,8 +33,8 @@ const TextInput = (props) => {
           <FontAwesomeIcon
             icon={faPaperPlane}
             size={"xl"}
-            style={{ cursor: "pointer" }}
-            color={props.disabled ? colors.send_btn_disabled : colors.send_btn}
+            style={{ cursor: "pointer", marginRight: 5 }}
+            color={props.btnColor}
             onClick={props.btnDisabled == true ? null : props.onClick}
           />
         }

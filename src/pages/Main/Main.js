@@ -22,7 +22,7 @@ import { Container } from "reactstrap";
 
 import styles from "./main.module.css";
 import { colors } from "../../assets/colors";
-import { welcome_msg } from "../../assets/data/welcom_msg";
+import { welcome_msg } from "../../assets/data/welcome_msg";
 
 const Main = (props) => {
   // 리덕스
@@ -97,7 +97,8 @@ const Main = (props) => {
       who: "client",
       text: chatMsg,
     };
-    setChatList([...chatList, chat]);
+    dispatch(req_client_question(chatMsg));
+    setChatList([...chatList, chat, answer]);
     setChatMsg("");
   };
 
@@ -169,6 +170,9 @@ const Main = (props) => {
             name="msg"
             value={chatMsg}
             btnDisabled={chatMsg.length > 0 ? false : true}
+            btnColor={
+              chatMsg.length > 0 ? colors.send_btn : colors.send_btn_disabled
+            }
             onChange={(e) => {
               onChange(e);
             }}

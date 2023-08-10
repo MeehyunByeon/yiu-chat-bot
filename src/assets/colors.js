@@ -9,6 +9,6 @@ export const colors = {
   footer_bg: "#dddddd",
   chat_msg_bg: "#e5eced",
 
-  send_btn: "#eeeeee",
+  send_btn: "#004851",
   send_btn_disabled: "#eeeeee",
 };

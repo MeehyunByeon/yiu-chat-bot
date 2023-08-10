@@ -7,20 +7,33 @@ import styles from "./welcomemsg.module.css";
 
 import { colors } from "../../assets/colors";
 
-import { welcome_msg } from "../../assets/data/welcom_msg";
+import { welcome_msg } from "../../assets/data/welcome_msg";
 
 const WelcomeMsg = (props) => {
   return (
-    <div>
-      <p style={{ whiteSpace: "pre-line", fontWeight: "bold", fontSize: 15 }}>
+    <div
+      style={{
+        backgroundColor: colors.chat_msg_bg,
+        padding: 10,
+        borderRadius: 20,
+      }}
+    >
+      <p
+        style={{
+          whiteSpace: "pre-line",
+          fontWeight: "bold",
+          fontSize: 15,
+          paddingLeft: 10,
+          paddingRight: 10,
+        }}
+      >
         {welcome_msg.greeting}
       </p>
-      <br />
       <div
         style={{
           display: "grid",
-          gridTemplateRows: "1fr ",
-          gridTemplateColumns: "1fr 1fr 1fr",
+          gridTemplateRows: "0.5fr ",
+          gridTemplateColumns: "0.5fr 0.5fr 0.5fr",
         }}
       >
         {welcome_msg.list.map((item, index) => {

@@ -4,20 +4,15 @@ import styles from "./chatbotmsg.module.css";
 import { colors } from "../../assets/colors";
 
 import WelcomeMsg from "./WelcomeMsg";
+import BotMsg from "./BotMsg";
 
 const ChatBotMsg = (props) => {
   {
     console.log(props.data);
   }
   return (
-    <div
-      style={{
-        backgroundColor: colors.chat_msg_bg,
-        padding: 30,
-        borderRadius: 20,
-      }}
-    >
-      {props.data.greeting ? <WelcomeMsg /> : <div></div>}
+    <div>
+      {props.data.greeting ? <WelcomeMsg /> : <BotMsg data={props.data} />}
     </div>
   );
 };
