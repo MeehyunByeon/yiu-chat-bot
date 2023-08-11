@@ -31,6 +31,7 @@ const Main = (props) => {
 
   const [chatList, setChatList] = useState([]);
   const [chatMsg, setChatMsg] = useState("");
+  const [tf, setTF] = useState(true);
 
   const [messageApi, contextHolder] = message.useMessage();
 
@@ -56,40 +57,16 @@ const Main = (props) => {
   // Welcome Message
   useEffect(() => {
     setChatList([...chatList, welcome_msg]);
-    setChatList([...chatList, welcome_msg]);
-    setChatList([...chatList, welcome_msg]);
   }, []);
+
+  // answer 새롭게 받을 때마다
+  useEffect(() => {
+    if (answer) setChatList([...chatList, answer]);
+  }, [answer, tf]);
 
   // 텍스트인풋 업데이트
   const onChange = (e) => {
     setChatMsg(e.target.value);
-  };
-
-  // 유효성 검사 확인 완료 => API요청
-  const request = () => {
-    dispatch(req_client_question(chatMsg))
-      .then((res) => {
-        console.log("res: ", res);
-        switch (res.payload) {
-          case true:
-            navigate("/");
-            break;
-          case 400:
-            errorMsg(`입력한 이메일과 비밀번호를 확인해주세요!`);
-            break;
-          case 401:
-            errorMsg(`이메일과 비밀번호가 일치하지 않습니다!`);
-            break;
-          case 500:
-            errorMsg(`관리자에게 문의해주세요.`);
-            break;
-          default:
-            break;
-        }
-      })
-      .catch((err) => {
-        errorMsg(`잠시 후에 다시 시도해주세요.`);
-      });
   };
 
   const addClientChat = () => {
@@ -97,9 +74,15 @@ const Main = (props) => {
       who: "client",
       text: chatMsg,
     };
+    setChatList([...chatList, chat]);
     dispatch(req_client_question(chatMsg));
-    setChatList([...chatList, chat, answer]);
+    setTF(!tf);
     setChatMsg("");
+  };
+
+  const request_code = (code) => {
+    dispatch(req_code(code));
+    setTF(!tf);
   };
 
   return (
@@ -132,7 +115,10 @@ const Main = (props) => {
                       marginRight: 20,
                     }}
                   />
-                  <ChatBotMsg data={item} />
+                  <ChatBotMsg
+                    data={item}
+                    sendCode={(code) => request_code(code)}
+                  />
                 </div>
               );
             } else
@@ -177,12 +163,10 @@ const Main = (props) => {
               onChange(e);
             }}
             onClick={() => {
-              dispatch(req_client_question(chatMsg));
               addClientChat();
             }}
             onPressEnter={() => {
-              dispatch(req_client_question(chatMsg));
-              addClientChat();
+              if (chatMsg.length > 0) addClientChat();
             }}
           />
         </Row>
@@ -192,33 +176,3 @@ const Main = (props) => {
 };
 
 export default Main;
-
-{
-  /* <List
-          dataSource={chatList}
-          renderItem={(item, index) => (
-            <List.Item>
-              {console.log("data: ", item)}
-              {item.who === "bot" ? (
-                <div
-                  style={{
-                    padding: 20,
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "flex-start",
-                  }}
-                >
-                  <Avatar
-                    icon={<RobotOutlined />}
-                    size={"large"}
-                    style={{ marginRight: 20 }}
-                  />
-                  <ChatBotMsg data={item} />
-                </div>
-              ) : (
-                <ClientMsg data={item} />
-              )}
-            </List.Item>
-          )}
-        ></List> */
-}

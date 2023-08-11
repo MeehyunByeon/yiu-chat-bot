@@ -7,12 +7,14 @@ import WelcomeMsg from "./WelcomeMsg";
 import BotMsg from "./BotMsg";
 
 const ChatBotMsg = (props) => {
-  {
-    console.log(props.data);
-  }
   return (
-    <div>
-      {props.data.greeting ? <WelcomeMsg /> : <BotMsg data={props.data} />}
+    <div style={{ maxWidth: "70%" }}>
+      {console.log(props.sendCode)}
+      {props.data.greeting ? (
+        <WelcomeMsg />
+      ) : (
+        <BotMsg data={props.data} sendCode={(res) => props.sendCode(res)} />
+      )}
     </div>
   );
 };

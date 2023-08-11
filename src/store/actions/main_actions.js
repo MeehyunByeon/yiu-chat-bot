@@ -1,4 +1,4 @@
-import { WELCOME, GET_ANSWER_Q, GET_ANSWER_C } from "../types";
+import { WELCOME, SAVE_CHAT, GET_ANSWER_Q, GET_ANSWER_C } from "../types";
 import axios from "axios";
 
 import { welcome_msg } from "../../assets/data/welcome_msg";
@@ -39,6 +39,7 @@ export function req_client_question(data) {
 
 // 코드에 대한 답변 가져오기
 export function req_code(data) {
+  console.log("액션에서 받음: ", data);
   const request = axios({
     method: "GET",
     url: process.env.REACT_APP_GET_ANSWER_C,

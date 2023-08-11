@@ -7,6 +7,7 @@ const ClientMsg = (props) => {
   return (
     <div
       style={{
+        maxWidth: "30%",
         backgroundColor: colors.yiu_orange_light,
         padding: 5,
         paddingLeft: 15,
