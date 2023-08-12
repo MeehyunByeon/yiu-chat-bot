@@ -11,6 +11,6 @@
   justify-content: center;
 }
 
-.suggestionListItem :hover {
-  background-color: #195a62;
+.suggestionListItem:hover {
+  background-color: #d1dedf;
 }

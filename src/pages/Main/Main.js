@@ -102,23 +102,27 @@ const Main = (props) => {
   };
 
   const showSuggestion = () => {
-    return suggestions.length > 0 ? (
-      suggestions.map((suggestion, index) => (
-        <div
-          key={index}
-          onClick={() => handleSuggestionClick(suggestion.code)}
-          style={{
-            fontSize: 14,
-            fontWeight: "bold",
-            padding: 5,
-            // marginBottom: 10,
-            cursor: "pointer",
-          }}
-          className={styles.suggestionListItem}
-        >
-          {suggestion.test}
-        </div>
-      ))
+    return suggestions.length > 0 && chatMsg.length > 0 ? (
+      <div style={{ paddingTop: 10, paddingBottom: 10 }}>
+        {suggestions.map((suggestion, index) => (
+          <div
+            key={index}
+            onClick={() => handleSuggestionClick(suggestion.code)}
+            style={{
+              fontSize: 14,
+              fontWeight: "bold",
+              padding: 10,
+              paddingLeft: 15,
+              paddingRight: 15,
+              // marginBottom: 10,
+              cursor: "pointer",
+            }}
+            className={styles.suggestionListItem}
+          >
+            {suggestion.test}
+          </div>
+        ))}
+      </div>
     ) : (
       <></>
     );
@@ -225,9 +229,8 @@ const Main = (props) => {
               }}
             />
           </div>
-          <div style={{ padding: 15 }}>
-            {autoComplete ? showSuggestion() : null}
-          </div>
+
+          {autoComplete ? showSuggestion() : null}
         </div>
         <Row
           justify={"center"}
