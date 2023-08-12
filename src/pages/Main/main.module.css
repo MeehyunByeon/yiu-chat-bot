@@ -5,9 +5,12 @@
   position: fixed;
   bottom: 0;
   left: 0;
-  height: 70px;
   width: 100%;
   background-color: #eeeeee;
   display: flex;
   justify-content: center;
+}
+
+.suggestionListItem :hover {
+  background-color: #195a62;
 }

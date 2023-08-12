@@ -6,8 +6,11 @@ export const colors = {
   yiu_orange: "#ffa400",
   yiu_orange_light: "#ffe3b2",
 
-  footer_bg: "#dddddd",
+  footer_bg: "#e2e2e2",
+  autocomplete_bg: "#f9f9f9",
+  autocomplete_top_bg: "#d1dedf",
   chat_msg_bg: "#e5eced",
+  switch_off: "#cbcbcb",
 
   send_btn: "#004851",
   send_btn_disabled: "#eeeeee",

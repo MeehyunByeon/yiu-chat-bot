@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { List, Avatar, Space, Row, Col, message } from "antd";
+import { List, Avatar, Space, Row, Col, message, Switch } from "antd";
 import { RobotOutlined } from "@ant-design/icons";
 
 import { faRobot } from "@fortawesome/free-solid-svg-icons";
@@ -23,15 +23,18 @@ import { Container } from "reactstrap";
 import styles from "./main.module.css";
 import { colors } from "../../assets/colors";
 import { welcome_msg } from "../../assets/data/welcome_msg";
+import { autocomplete_data } from "../../assets/data/autocomplete_data";
 
 const Main = (props) => {
   // 리덕스
   const dispatch = useDispatch();
   const answer = useSelector((state) => state.Main.answer);
 
-  const [chatList, setChatList] = useState([]);
-  const [chatMsg, setChatMsg] = useState("");
-  const [tf, setTF] = useState(true);
+  const [chatList, setChatList] = useState([]); // 채팅 리스트
+  const [chatMsg, setChatMsg] = useState(""); // Client 채팅 실시간 저장
+  const [autoComplete, setAutoComplete] = useState(true); // 자동완성 ON/OFF
+  const [suggestions, setSuggestions] = useState([]); //검색어 추천 항목 저장
+  const [tf, setTF] = useState(true); // 같은 답변 useEffect 발동X에 대한 동작 처리
 
   const [messageApi, contextHolder] = message.useMessage();
 
@@ -83,6 +86,52 @@ const Main = (props) => {
   const request_code = (code) => {
     dispatch(req_code(code));
     setTF(!tf);
+  };
+
+  // 자동검색
+  const handleInputChange = (event) => {
+    const value = event.target.value;
+    //입력값 실시간 반영?
+    setChatMsg(value);
+    // setSearchTerm(value);
+
+    const filteredSuggestions = autocomplete_data.filter((suggestion) =>
+      suggestion.test.toLowerCase().includes(value.toLowerCase())
+    ); // 입력된 값을  mockSuggestions에서 찾아 suggestion에 저장
+    setSuggestions(filteredSuggestions);
+  };
+
+  const showSuggestion = () => {
+    return suggestions.length > 0 ? (
+      suggestions.map((suggestion, index) => (
+        <div
+          key={index}
+          onClick={() => handleSuggestionClick(suggestion.code)}
+          style={{
+            fontSize: 14,
+            fontWeight: "bold",
+            padding: 5,
+            // marginBottom: 10,
+            cursor: "pointer",
+          }}
+          className={styles.suggestionListItem}
+        >
+          {suggestion.test}
+        </div>
+      ))
+    ) : (
+      <></>
+    );
+  };
+
+  //콘솔에 띄우기
+  const handleSuggestionClick = (code) => {
+    console.log("Selected suggestion code:", code);
+  };
+
+  // 자동완성 ON/OFF
+  const onChangeAutoCompleteBtn = () => {
+    setAutoComplete(!autoComplete);
   };
 
   return (
@@ -140,15 +189,55 @@ const Main = (props) => {
       <div ref={messageEndRef}></div>
       <div
         className={styles.footer}
-        style={{ backgroundColor: colors.footer_bg }}
+        style={{ backgroundColor: "white", flexDirection: "column" }}
       >
+        {/* 자동검색 */}
+        <div
+          style={{
+            backgroundColor: colors.autocomplete_bg,
+          }}
+        >
+          <div
+            style={{
+              backgroundColor: colors.autocomplete_top_bg,
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "flex-end",
+              borderTopLeftRadius: 10,
+              borderTopRightRadius: 10,
+              alignItems: "center",
+              paddingRight: 10,
+              paddingLeft: 10,
+            }}
+          >
+            <p style={{ fontSize: 13, fontWeight: "bold", marginRight: 10 }}>
+              자동완성
+            </p>
+            <Switch
+              defaultChecked
+              onChange={onChangeAutoCompleteBtn}
+              checkedChildren={"ON"}
+              unCheckedChildren={"OFF"}
+              style={{
+                // margin: 10,
+                backgroundColor:
+                  autoComplete === true ? colors.yiu_main : colors.switch_off,
+              }}
+            />
+          </div>
+          <div style={{ padding: 15 }}>
+            {autoComplete ? showSuggestion() : null}
+          </div>
+        </div>
         <Row
           justify={"center"}
           style={{
+            backgroundColor: colors.footer_bg,
             width: "100%",
             alignContent: "center",
-            marginLeft: 10,
-            marginRight: 10,
+            padding: 10,
+            // marginLeft: 10,
+            // marginRight: 10,
           }}
         >
           <TextInput
@@ -159,9 +248,7 @@ const Main = (props) => {
             btnColor={
               chatMsg.length > 0 ? colors.send_btn : colors.send_btn_disabled
             }
-            onChange={(e) => {
-              onChange(e);
-            }}
+            onChange={handleInputChange}
             onClick={() => {
               addClientChat();
             }}

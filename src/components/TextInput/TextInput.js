@@ -29,6 +29,7 @@ const TextInput = (props) => {
         disabled={props.disabled}
         onChange={props.onChange}
         onPressEnter={props.onPressEnter}
+        autoComplete="off"
         suffix={
           <FontAwesomeIcon
             icon={faPaperPlane}
