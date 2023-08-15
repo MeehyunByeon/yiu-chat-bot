@@ -1,0 +1,10 @@
+.cardButton {
+  background-color: white;
+  text-align: center;
+}
+
+.cardButton:hover {
+  background-color: #00205b;
+  color: white;
+  cursor: pointer;
+}

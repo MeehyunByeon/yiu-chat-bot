@@ -13,7 +13,7 @@ const TextInput = (props) => {
     <ConfigProvider
       theme={{
         token: {
-          colorPrimary: colors.yiu_main,
+          colorPrimary: colors.chatbot_main,
         },
       }}
     >

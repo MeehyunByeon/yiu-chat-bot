@@ -1,15 +1,27 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { List, Avatar, Space, Row, Col, message, Switch } from "antd";
-import { RobotOutlined } from "@ant-design/icons";
+import {
+  List,
+  Avatar,
+  Space,
+  Row,
+  Col,
+  message,
+  Switch,
+  Modal,
+  Button,
+} from "antd";
+import { pdfjs } from "react-pdf";
+import { Document, Page } from "react-pdf";
 
 import { faRobot } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import TextInput from "../../components/TextInput/TextInput";
-import ClientMsg from "./ClientMsg";
-import ChatBotMsg from "./ChatBotMsg";
+import ClientMsg from "../../components/Message/ClientMsg";
+import ChatBotMsg from "../../components/Message/ChatBotMsg";
+import PDF_Viewer from "../../components/PDF_Viewer/PdfViewer";
 
 // 리덕스
 import { useDispatch, useSelector } from "react-redux";
@@ -25,6 +37,8 @@ import { colors } from "../../assets/colors";
 import { welcome_msg } from "../../assets/data/welcome_msg";
 import { autocomplete_data } from "../../assets/data/autocomplete_data";
 
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+
 const Main = (props) => {
   // 리덕스
   const dispatch = useDispatch();
@@ -36,11 +50,27 @@ const Main = (props) => {
   const [suggestions, setSuggestions] = useState([]); //검색어 추천 항목 저장
   const [tf, setTF] = useState(true); // 같은 답변 useEffect 발동X에 대한 동작 처리
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [numPages, setNumPages] = useState(null); // 총 페이지수
+  const [pageNumber, setPageNumber] = useState(1); // 현재 페이지
+  const [pageScale, setPageScale] = useState(1); // 페이지 스케일
+
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
   const [messageApi, contextHolder] = message.useMessage();
 
   // 스크롤
   const messageEndRef = useRef();
 
+  // 새로운 메세지 => 스크롤 맨 아래로
   useEffect(() => {
     messageEndRef.current.scrollIntoView({ behavior: "smooth" });
   }, [chatList]);
@@ -67,11 +97,6 @@ const Main = (props) => {
     if (answer) setChatList([...chatList, answer]);
   }, [answer, tf]);
 
-  // 텍스트인풋 업데이트
-  const onChange = (e) => {
-    setChatMsg(e.target.value);
-  };
-
   const addClientChat = () => {
     const chat = {
       who: "client",
@@ -83,12 +108,18 @@ const Main = (props) => {
     setChatMsg("");
   };
 
-  const request_code = (code) => {
+  // Child Component에서 사용하는 code api 발동 함수
+  const request_code = (title, code) => {
+    const chat = {
+      who: "client",
+      text: `${title}에 대해 알려주세요.`,
+    };
+    setChatList([...chatList, chat]);
     dispatch(req_code(code));
     setTF(!tf);
   };
 
-  // 자동검색
+  // 자동완성
   const handleInputChange = (event) => {
     const value = event.target.value;
     //입력값 실시간 반영?
@@ -101,6 +132,7 @@ const Main = (props) => {
     setSuggestions(filteredSuggestions);
   };
 
+  // 자동완성 문장을 보여주는 함수
   const showSuggestion = () => {
     return suggestions.length > 0 && chatMsg.length > 0 ? (
       <div style={{ paddingTop: 10, paddingBottom: 10 }}>
@@ -133,10 +165,10 @@ const Main = (props) => {
     console.log("Selected suggestion code:", code);
   };
 
-  // 자동완성 ON/OFF
-  const onChangeAutoCompleteBtn = () => {
-    setAutoComplete(!autoComplete);
-  };
+  function onDocumentLoadSuccess({ numPages }) {
+    console.log(`numPages ${numPages}`);
+    setNumPages(numPages);
+  }
 
   return (
     <div>
@@ -161,16 +193,16 @@ const Main = (props) => {
                   <FontAwesomeIcon
                     icon={faRobot}
                     size={"2x"}
-                    color={colors.yiu_main}
+                    color={colors.chatbot_main}
                     style={{
-                      backgroundColor: "white",
+                      backgroundColor: colors.white,
                       borderRadius: 50,
                       marginRight: 20,
                     }}
                   />
                   <ChatBotMsg
                     data={item}
-                    sendCode={(code) => request_code(code)}
+                    sendCode={(title, code) => request_code(title, code)}
                   />
                 </div>
               );
@@ -193,7 +225,7 @@ const Main = (props) => {
       <div ref={messageEndRef}></div>
       <div
         className={styles.footer}
-        style={{ backgroundColor: "white", flexDirection: "column" }}
+        style={{ backgroundColor: colors.white, flexDirection: "column" }}
       >
         {/* 자동검색 */}
         <div
@@ -203,7 +235,7 @@ const Main = (props) => {
         >
           <div
             style={{
-              backgroundColor: colors.autocomplete_top_bg,
+              backgroundColor: colors.chatbot_main_mid2,
               display: "flex",
               flexDirection: "row",
               justifyContent: "flex-end",
@@ -219,13 +251,15 @@ const Main = (props) => {
             </p>
             <Switch
               defaultChecked
-              onChange={onChangeAutoCompleteBtn}
+              onChange={() => setAutoComplete(!autoComplete)}
               checkedChildren={"ON"}
               unCheckedChildren={"OFF"}
               style={{
                 // margin: 10,
                 backgroundColor:
-                  autoComplete === true ? colors.yiu_main : colors.switch_off,
+                  autoComplete === true
+                    ? colors.chatbot_main
+                    : colors.switch_off,
               }}
             />
           </div>
@@ -249,7 +283,9 @@ const Main = (props) => {
             value={chatMsg}
             btnDisabled={chatMsg.length > 0 ? false : true}
             btnColor={
-              chatMsg.length > 0 ? colors.send_btn : colors.send_btn_disabled
+              chatMsg.length > 0
+                ? colors.chatbot_main
+                : colors.send_btn_disabled
             }
             onChange={handleInputChange}
             onClick={() => {
@@ -261,6 +297,19 @@ const Main = (props) => {
           />
         </Row>
       </div>
+      {/* <Button type="primary" onClick={showModal}>
+        Open Modal
+      </Button>
+      <Modal
+        centered
+        open={isModalOpen}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        width={"50%"}
+        footer={null}
+      >
+        <PDF_Viewer />
+      </Modal> */}
     </div>
   );
 };

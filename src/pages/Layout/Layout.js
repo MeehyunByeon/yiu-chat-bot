@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Layout } from "antd";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 
@@ -13,7 +12,7 @@ const LAYOUT = (props) => {
     <div>
       <div
         className={styles.header}
-        style={{ backgroundColor: colors.yiu_main, alignItems: "center" }}
+        style={{ backgroundColor: colors.chatbot_main, alignItems: "center" }}
       >
         <Header />
       </div>

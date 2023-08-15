@@ -3,8 +3,7 @@ import { Card, List, Avatar, Space } from "antd";
 
 import { RobotOutline, BellOutlined } from "@ant-design/icons";
 
-import styles from "./welcomemsg.module.css";
-
+import styles from "./message.module.css";
 import { colors } from "../../assets/colors";
 
 import { welcome_msg } from "../../assets/data/welcome_msg";
@@ -13,16 +12,17 @@ const WelcomeMsg = (props) => {
   return (
     <div
       style={{
-        backgroundColor: colors.chat_msg_bg,
+        backgroundColor: colors.chatbot_main_light,
         padding: 10,
         borderRadius: 20,
+        color: colors.fontColor,
       }}
     >
       <p
         style={{
           whiteSpace: "pre-line",
           fontWeight: "bold",
-          fontSize: 15,
+          fontSize: 14,
           paddingLeft: 10,
           paddingRight: 10,
         }}
@@ -42,7 +42,7 @@ const WelcomeMsg = (props) => {
               style={{
                 textAlign: "center",
                 justifyContent: "center",
-                backgroundColor: "white",
+                backgroundColor: colors.white,
                 padding: 10,
                 margin: 10,
                 borderRadius: 10,
@@ -54,45 +54,22 @@ const WelcomeMsg = (props) => {
                 size={"large"}
                 style={{
                   backgroundColor: "transparent",
-                  color: colors.yiu_main,
+                  color: colors.chatbot_main,
                 }}
               />
-              <p style={{ fontWeight: "bold", fontSize: 15 }}>{item.title}</p>
+              <p
+                style={{
+                  fontWeight: "bold",
+                  fontSize: 14,
+                  margin: 3,
+                }}
+              >
+                {item.title}
+              </p>
             </div>
           );
         })}
       </div>
-      {/* <List
-        grid={{
-          gutter: 15,
-          column: 3,
-        }}
-        dataSource={welcome_msg.list}
-        renderItem={(item) => (
-          <List.Item>
-            <div
-              style={{
-                textAlign: "center",
-                justifyContent: "center",
-                backgroundColor: "white",
-                padding: 10,
-                borderRadius: 10,
-                cursor: "pointer",
-              }}
-            >
-              <Avatar
-                icon={<BellOutlined />}
-                size={"large"}
-                style={{
-                  backgroundColor: "transparent",
-                  color: colors.yiu_main,
-                }}
-              />
-              <p style={{ fontWeight: "bold", fontSize: 15 }}>{item.title}</p>
-            </div>
-          </List.Item>
-        )}
-      /> */}
     </div>
   );
 };
