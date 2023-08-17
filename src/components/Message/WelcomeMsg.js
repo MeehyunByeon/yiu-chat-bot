@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Card, List, Avatar, Space } from "antd";
 
-import { RobotOutline, BellOutlined } from "@ant-design/icons";
+import { RobotOutline, BellOutlined, BorderOutlined } from "@ant-design/icons";
 
 import styles from "./message.module.css";
 import { colors } from "../../assets/colors";
@@ -50,7 +50,7 @@ const WelcomeMsg = (props) => {
               }}
             >
               <Avatar
-                icon={<BellOutlined />}
+                icon={<BorderOutlined />}
                 size={"large"}
                 style={{
                   backgroundColor: "transparent",
