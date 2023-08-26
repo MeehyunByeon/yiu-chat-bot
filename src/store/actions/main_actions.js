@@ -1,4 +1,10 @@
-import { WELCOME, SAVE_CHAT, GET_ANSWER_Q, GET_ANSWER_C } from "../types";
+import {
+  WELCOME,
+  SAVE_CHAT,
+  GET_ANSWER_Q,
+  GET_ANSWER_C,
+  CREATE_ASK,
+} from "../types";
 import axios from "axios";
 
 import { welcome_msg } from "../../assets/data/welcome_msg";
@@ -15,7 +21,7 @@ export function get_welcome_msg(data) {
 // 사용자 질문에 대한 답변 가져오기
 export function req_client_question(data) {
   const request = axios({
-    method: "GET",
+    method: "POST",
     url: process.env.REACT_APP_GET_ANSWER_Q,
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
@@ -41,7 +47,7 @@ export function req_client_question(data) {
 export function req_code(data) {
   console.log("액션에서 받음: ", data);
   const request = axios({
-    method: "GET",
+    method: "POST",
     url: process.env.REACT_APP_GET_ANSWER_C,
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
@@ -60,5 +66,31 @@ export function req_code(data) {
   return {
     type: GET_ANSWER_C,
     payload: test_data,
+  };
+}
+
+// 질문하기
+export function req_ask(data) {
+  console.log("액션에서 받음: ", data);
+  const request = axios({
+    method: "POST",
+    url: process.env.REACT_APP_CREATE_ASK,
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    data: {
+      ask: data,
+    },
+  })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((err) => {
+      return err.response.status;
+    });
+
+  return {
+    type: CREATE_ASK,
+    payload: 200,
   };
 }

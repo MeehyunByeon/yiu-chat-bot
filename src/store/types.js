@@ -8,3 +8,5 @@ export const SAVE_CHAT = "Save_Chat";
 export const GET_ANSWER_Q = "Get_Answer_Q";
 // 코드 API
 export const GET_ANSWER_C = "Get_Answer_C";
+// Ask
+export const CREATE_ASK = "CREATE_Ask";

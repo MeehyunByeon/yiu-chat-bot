@@ -1,4 +1,4 @@
-import { WELCOME, GET_ANSWER_Q, GET_ANSWER_C } from "../types";
+import { WELCOME, GET_ANSWER_Q, GET_ANSWER_C, CREATE_ASK } from "../types";
 
 export default function (state = {}, action) {
   switch (action.type) {
@@ -24,6 +24,11 @@ export default function (state = {}, action) {
         // top: action.payload.top || false,
         // mid: action.payload.mid || false,
         // bot: action.payload.bot || false,
+      };
+    case CREATE_ASK:
+      return {
+        ...state,
+        ask: action.payload || false,
       };
     default:
       return state;

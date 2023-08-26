@@ -10,12 +10,6 @@ const LAYOUT = (props) => {
 
   return (
     <div>
-      <div
-        className={styles.header}
-        style={{ backgroundColor: colors.chatbot_main, alignItems: "center" }}
-      >
-        <Header />
-      </div>
       <div className={styles.main}>{children}</div>
 
       {/* <div

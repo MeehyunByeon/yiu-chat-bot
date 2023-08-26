@@ -1,6 +1,18 @@
 .container {
   margin-top: 50;
 }
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 55px;
+  width: 100%;
+  align-content: center;
+  display: flex;
+  justify-content: center;
+}
+
 .footer {
   position: fixed;
   bottom: 0;
@@ -13,4 +25,8 @@
 
 .suggestionListItem:hover {
   background-color: #ccd2de;
+}
+
+textarea {
+  resize: none;
 }

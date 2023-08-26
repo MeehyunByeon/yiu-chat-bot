@@ -2,15 +2,17 @@ import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 import {
-  List,
-  Avatar,
-  Space,
   Row,
-  Col,
   message,
   Switch,
-  Modal,
   Button,
+  Col,
+  DatePicker,
+  Drawer,
+  Form,
+  Input,
+  Select,
+  Space,
 } from "antd";
 import { pdfjs } from "react-pdf";
 import { Document, Page } from "react-pdf";
@@ -28,9 +30,11 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   req_client_question,
   req_code,
+  req_ask,
 } from "../../store/actions/main_actions";
 
 import { Container } from "reactstrap";
+import Header from "../../components/Header/Header";
 
 import styles from "./main.module.css";
 import { colors } from "../../assets/colors";
@@ -43,12 +47,16 @@ const Main = (props) => {
   // 리덕스
   const dispatch = useDispatch();
   const answer = useSelector((state) => state.Main.answer);
+  const ask = useSelector((state) => state.Main.ask);
 
+  const [open, setOpen] = useState(true); // drawer on/off
+  const [askText, setAskText] = useState(""); // ask 질문
   const [chatList, setChatList] = useState([]); // 채팅 리스트
   const [chatMsg, setChatMsg] = useState(""); // Client 채팅 실시간 저장
   const [autoComplete, setAutoComplete] = useState(true); // 자동완성 ON/OFF
   const [suggestions, setSuggestions] = useState([]); //검색어 추천 항목 저장
   const [tf, setTF] = useState(true); // 같은 답변 useEffect 발동X에 대한 동작 처리
+  const [asktf, setAskTF] = useState(true); // 같은 답변 useEffect 발동X에 대한 동작 처리
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [numPages, setNumPages] = useState(null); // 총 페이지수
@@ -76,9 +84,9 @@ const Main = (props) => {
   }, [chatList]);
 
   // 에러메세지 함수
-  const errorMsg = (data) => {
+  const successMsg = (data) => {
     messageApi.open({
-      type: "error",
+      type: "success",
       content: data,
     });
   };
@@ -96,6 +104,11 @@ const Main = (props) => {
   useEffect(() => {
     if (answer) setChatList([...chatList, answer]);
   }, [answer, tf]);
+
+  // ask 새롭게 받을 때마다
+  useEffect(() => {
+    if (ask === 200) successMsg("질문 제출에 성공했습니다.");
+  }, [ask, asktf]);
 
   const addClientChat = () => {
     const chat = {
@@ -117,6 +130,16 @@ const Main = (props) => {
     setChatList([...chatList, chat]);
     dispatch(req_code(code));
     setTF(!tf);
+  };
+
+  const handleAskInputChange = (event) => {
+    const value = event.target.value;
+    setAskText(value);
+  };
+
+  const sendAsk = () => {
+    dispatch(req_client_question(chatMsg));
+    setOpen(false);
   };
 
   // 자동완성
@@ -172,6 +195,62 @@ const Main = (props) => {
 
   return (
     <div>
+      {contextHolder}
+      <div
+        className={styles.header}
+        style={{ backgroundColor: colors.chatbot_main, alignItems: "center" }}
+      >
+        <Header onClick={() => setOpen(true)} />
+      </div>
+      <Drawer
+        placement={"top"}
+        title="원하는 답변을 얻지 못했나요?"
+        width={720}
+        onClose={() => setOpen(false)}
+        open={open}
+        bodyStyle={{
+          paddingBottom: 80,
+        }}
+        extra={
+          <Space>
+            <Button onClick={() => setOpen(false)}>취소</Button>
+            <Button onClick={() => sendAsk()} type="primary">
+              제출
+            </Button>
+          </Space>
+        }
+      >
+        <div>
+          <p>
+            <b>
+              챗봇을 통해 원하는 답변을 얻지 못했다면 아래 입력칸에 질문을
+              입력해주세요.
+              <br />
+              입력된 답변은 챗봇의 더 정확한 답변을 위해서만 사용됩니다.
+              <br />
+              <br />
+              ※유의사항※
+              <br />
+              원활한 챗봇 개발을 위해 욕설, 비방, 저속한 표현 등을 삼가해주세요!
+              <br />
+              <br />
+            </b>
+          </p>
+          <Input.TextArea
+            id="ask"
+            name="ask"
+            value={askText}
+            onChange={handleAskInputChange}
+            onPressEnter={() => {
+              if (askText.length > 0) sendAsk();
+            }}
+            rows={5}
+            placeholder="질문을 입력하세요."
+            autoSize
+            maxLength={300}
+          />
+        </div>
+      </Drawer>
       <Container style={{ marginTop: 100, marginBottom: 100 }}>
         {chatList &&
           chatList.map((item, index) => {
@@ -246,9 +325,22 @@ const Main = (props) => {
               paddingLeft: 10,
             }}
           >
-            <p style={{ fontSize: 13, fontWeight: "bold", marginRight: 10 }}>
-              자동완성
-            </p>
+            <div
+              style={{
+                width: "100%",
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+                fontSize: 13,
+                fontWeight: "bold",
+              }}
+            >
+              <Button type="text" style={{ fontWeight: "bold" }}>
+                원하는 답변을 얻지 못했다면?
+              </Button>
+              <p style={{ marginRight: 10 }}>자동완성</p>
+            </div>
             <Switch
               defaultChecked
               onChange={() => setAutoComplete(!autoComplete)}
