@@ -12,7 +12,10 @@ const ChatBotMsg = (props) => {
       {props.data.greeting ? (
         <WelcomeMsg />
       ) : (
-        <BotMsg data={props.data} sendCode={(res) => props.sendCode(res)} />
+        <BotMsg
+          data={props.data}
+          sendCode={(title, link) => props.sendCode(title, link)}
+        />
       )}
     </div>
   );

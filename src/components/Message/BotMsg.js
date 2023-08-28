@@ -74,13 +74,13 @@ const BotMsg = (props) => {
               }}
             >
               <p>{item.text}</p>
-              {item.btnType1 === 0
+              {item.btnType1 === 0 || item.btnType1 === "None"
                 ? null
                 : showButton(item.btnType1, item.btnTitle1, item.btnLink1)}
-              {item.btnType2 === 0
+              {item.btnType2 === 0 || item.btnType2 === "None"
                 ? null
                 : showButton(item.btnType2, item.btnTitle2, item.btnLink2)}
-              {item.btnType3 === 0
+              {item.btnType3 === 0 || item.btnType3 === "None"
                 ? null
                 : showButton(item.btnType3, item.btnTitle3, item.btnLink3)}
             </div>

@@ -49,13 +49,13 @@ const Main = (props) => {
   const answer = useSelector((state) => state.Main.answer);
   const ask = useSelector((state) => state.Main.ask);
 
-  const [open, setOpen] = useState(true); // drawer on/off
+  const [open, setOpen] = useState(false); // drawer on/off
   const [askText, setAskText] = useState(""); // ask 질문
   const [chatList, setChatList] = useState([]); // 채팅 리스트
   const [chatMsg, setChatMsg] = useState(""); // Client 채팅 실시간 저장
   const [autoComplete, setAutoComplete] = useState(true); // 자동완성 ON/OFF
   const [suggestions, setSuggestions] = useState([]); //검색어 추천 항목 저장
-  const [tf, setTF] = useState(true); // 같은 답변 useEffect 발동X에 대한 동작 처리
+  // const [tf, setTF] = useState(true); // 같은 답변 useEffect 발동X에 대한 동작 처리
   const [asktf, setAskTF] = useState(true); // 같은 답변 useEffect 발동X에 대한 동작 처리
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -83,11 +83,20 @@ const Main = (props) => {
     messageEndRef.current.scrollIntoView({ behavior: "smooth" });
   }, [chatList]);
 
-  // 에러메세지 함수
+  // 성공메세지 함수
   const successMsg = (data) => {
     messageApi.open({
       type: "success",
       content: data,
+    });
+  };
+
+  // 에러메세지 함수
+  const ErrorMsg = (data) => {
+    messageApi.open({
+      type: "error",
+      content: data,
+      duration: 2,
     });
   };
 
@@ -103,11 +112,12 @@ const Main = (props) => {
   // answer 새롭게 받을 때마다
   useEffect(() => {
     if (answer) setChatList([...chatList, answer]);
-  }, [answer, tf]);
+  }, [answer]);
 
   // ask 새롭게 받을 때마다
   useEffect(() => {
     if (ask === 200) successMsg("질문 제출에 성공했습니다.");
+    else if (ask === false) ErrorMsg(`잠시 후에 다시 시도해주세요!`);
   }, [ask, asktf]);
 
   const addClientChat = () => {
@@ -117,7 +127,6 @@ const Main = (props) => {
     };
     setChatList([...chatList, chat]);
     dispatch(req_client_question(chatMsg));
-    setTF(!tf);
     setChatMsg("");
   };
 
@@ -129,7 +138,6 @@ const Main = (props) => {
     };
     setChatList([...chatList, chat]);
     dispatch(req_code(code));
-    setTF(!tf);
   };
 
   const handleAskInputChange = (event) => {
@@ -138,7 +146,9 @@ const Main = (props) => {
   };
 
   const sendAsk = () => {
-    dispatch(req_client_question(chatMsg));
+    setAskTF(!asktf);
+    dispatch(req_ask(askText));
+    setAskText("");
     setOpen(false);
   };
 
@@ -150,7 +160,7 @@ const Main = (props) => {
     // setSearchTerm(value);
 
     const filteredSuggestions = autocomplete_data.filter((suggestion) =>
-      suggestion.test.toLowerCase().includes(value.toLowerCase())
+      suggestion.question.toLowerCase().includes(value.toLowerCase())
     ); // 입력된 값을  mockSuggestions에서 찾아 suggestion에 저장
     setSuggestions(filteredSuggestions);
   };
@@ -158,7 +168,14 @@ const Main = (props) => {
   // 자동완성 문장을 보여주는 함수
   const showSuggestion = () => {
     return suggestions.length > 0 && chatMsg.length > 0 ? (
-      <div style={{ paddingTop: 10, paddingBottom: 10 }}>
+      <div
+        style={{
+          paddingTop: 10,
+          paddingBottom: 10,
+          maxHeight: "200px",
+          overflowY: "scroll",
+        }}
+      >
         {suggestions.map((suggestion, index) => (
           <div
             key={index}
@@ -174,7 +191,7 @@ const Main = (props) => {
             }}
             className={styles.suggestionListItem}
           >
-            {suggestion.test}
+            {suggestion.question}
           </div>
         ))}
       </div>
@@ -202,55 +219,6 @@ const Main = (props) => {
       >
         <Header onClick={() => setOpen(true)} />
       </div>
-      <Drawer
-        placement={"top"}
-        title="원하는 답변을 얻지 못했나요?"
-        width={720}
-        onClose={() => setOpen(false)}
-        open={open}
-        bodyStyle={{
-          paddingBottom: 80,
-        }}
-        extra={
-          <Space>
-            <Button onClick={() => setOpen(false)}>취소</Button>
-            <Button onClick={() => sendAsk()} type="primary">
-              제출
-            </Button>
-          </Space>
-        }
-      >
-        <div>
-          <p>
-            <b>
-              챗봇을 통해 원하는 답변을 얻지 못했다면 아래 입력칸에 질문을
-              입력해주세요.
-              <br />
-              입력된 답변은 챗봇의 더 정확한 답변을 위해서만 사용됩니다.
-              <br />
-              <br />
-              ※유의사항※
-              <br />
-              원활한 챗봇 개발을 위해 욕설, 비방, 저속한 표현 등을 삼가해주세요!
-              <br />
-              <br />
-            </b>
-          </p>
-          <Input.TextArea
-            id="ask"
-            name="ask"
-            value={askText}
-            onChange={handleAskInputChange}
-            onPressEnter={() => {
-              if (askText.length > 0) sendAsk();
-            }}
-            rows={5}
-            placeholder="질문을 입력하세요."
-            autoSize
-            maxLength={300}
-          />
-        </div>
-      </Drawer>
       <Container style={{ marginTop: 100, marginBottom: 100 }}>
         {chatList &&
           chatList.map((item, index) => {
@@ -330,15 +298,16 @@ const Main = (props) => {
                 width: "100%",
                 display: "flex",
                 flexDirection: "row",
-                justifyContent: "space-between",
+                justifyContent: "flex-end",
+                // justifyContent: "space-between",
                 alignItems: "center",
                 fontSize: 13,
                 fontWeight: "bold",
               }}
             >
-              <Button type="text" style={{ fontWeight: "bold" }}>
+              {/* <Button type="text" style={{ fontWeight: "bold" }}>
                 원하는 답변을 얻지 못했다면?
-              </Button>
+              </Button> */}
               <p style={{ marginRight: 10 }}>자동완성</p>
             </div>
             <Switch
@@ -389,6 +358,62 @@ const Main = (props) => {
           />
         </Row>
       </div>
+      <Drawer
+        placement={"right"}
+        title="원하는 답변을 얻지 못했나요?"
+        width={720}
+        // maskStyle={{ backgroundColor: "red" }}
+        mask={false}
+        // maskClosable={true}
+        onClose={() => setOpen(false)}
+        open={open}
+        bodyStyle={{
+          paddingBottom: 80,
+        }}
+        extra={
+          <Space>
+            <Button onClick={() => setOpen(false)}>취소</Button>
+            <Button
+              onClick={() => sendAsk()}
+              type="primary"
+              disabled={askText.length > 0 ? false : true}
+            >
+              제출
+            </Button>
+          </Space>
+        }
+      >
+        <div>
+          <p>
+            <b>
+              챗봇을 통해 원하는 답변을 얻지 못했다면 아래 입력칸에 질문을
+              입력해주세요.
+              <br />
+              입력된 답변은 챗봇의 더 정확한 답변을 위해서만 사용됩니다.
+              <br />
+              <br />
+              ※유의사항※
+              <br />
+              원활한 챗봇 개발을 위해 욕설, 비방, 저속한 표현 등을 삼가해주세요!
+              <br />
+              <br />
+            </b>
+          </p>
+          <Input.TextArea
+            id="ask"
+            name="ask"
+            value={askText}
+            onChange={handleAskInputChange}
+            onPressEnter={() => {
+              if (askText.length > 0) sendAsk();
+            }}
+            rows={5}
+            placeholder="질문을 입력하세요."
+            autoSize
+            maxLength={300}
+          />
+        </div>
+      </Drawer>
       {/* <Button type="primary" onClick={showModal}>
         Open Modal
       </Button>

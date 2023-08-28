@@ -39,7 +39,7 @@ export function req_client_question(data) {
 
   return {
     type: GET_ANSWER_Q,
-    payload: test_data,
+    payload: request,
   };
 }
 
@@ -65,13 +65,12 @@ export function req_code(data) {
 
   return {
     type: GET_ANSWER_C,
-    payload: test_data,
+    payload: request,
   };
 }
 
 // 질문하기
 export function req_ask(data) {
-  console.log("액션에서 받음: ", data);
   const request = axios({
     method: "POST",
     url: process.env.REACT_APP_CREATE_ASK,
@@ -83,7 +82,7 @@ export function req_ask(data) {
     },
   })
     .then((response) => {
-      return response.data;
+      return response.status;
     })
     .catch((err) => {
       return err.response.status;
@@ -91,6 +90,6 @@ export function req_ask(data) {
 
   return {
     type: CREATE_ASK,
-    payload: 200,
+    payload: request,
   };
 }
