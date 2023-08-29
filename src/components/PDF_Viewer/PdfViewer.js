@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 
 import { List, Avatar, Space, Row, Col, message, Switch } from "antd";
 import { pdfjs, Document, Page } from "react-pdf";
-import pdf from "./info.pdf";
+import pdf from "./yiu_info.pdf";
 
 import styles from "./pdfviewer.module.css";
 

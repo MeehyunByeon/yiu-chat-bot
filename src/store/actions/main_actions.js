@@ -53,7 +53,8 @@ export function req_code(data) {
       "Content-Type": "application/x-www-form-urlencoded",
     },
     data: {
-      code: data,
+      question: data.question,
+      code: data.code,
     },
   })
     .then((response) => {
