@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { Card, List, Avatar, Space } from "antd";
 
-import { RobotOutline, BellOutlined, BorderOutlined } from "@ant-design/icons";
-
 import styles from "./message.module.css";
 import { colors } from "../../assets/colors";
 
@@ -43,16 +41,19 @@ const WelcomeMsg = (props) => {
                 textAlign: "center",
                 justifyContent: "center",
                 backgroundColor: colors.white,
-                padding: 10,
+                padding: 8,
                 margin: 10,
                 borderRadius: 10,
                 cursor: "pointer",
               }}
             >
+              {console.log()}
               <Avatar
-                icon={<BorderOutlined />}
+                src={item.img}
                 size={"large"}
                 style={{
+                  width: 60,
+                  height: 60,
                   backgroundColor: "transparent",
                   color: colors.chatbot_main,
                 }}

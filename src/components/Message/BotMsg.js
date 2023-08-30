@@ -69,7 +69,7 @@ const BotMsg = (props) => {
                 marginRight: 10,
                 paddingLeft: 15,
                 paddingRight: 15,
-                backgroundColor: colors.chatbot_main_light,
+                backgroundColor: "colors.chatbot_main_light",
                 borderRadius: 10,
               }}
             >

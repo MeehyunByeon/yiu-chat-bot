@@ -5,40 +5,49 @@ export const welcome_msg = {
   궁금한 부분이 있나요? 언제나 여러분의 궁금증을 해결해주는 용용이가 바로 답변해 드려요!😘`,
   list: [
     {
-      title: `학사일정`,
-      img: "",
-    },
-    {
-      title: `교내 연락처`,
-      img: "",
-    },
-    {
-      title: `장학금`,
-      img: "",
+      title: `교내연락처`,
+      img: `https://img.icons8.com/bubbles/100/phone--v2.png`,
+      code: "F학과M연락처",
     },
     {
       title: `도서관`,
-      img: "",
-    },
-    {
-      title: `졸업`,
-      img: "",
-    },
-    {
-      title: `등록금`,
-      img: "",
+      img: "https://img.icons8.com/bubbles/100/book-shelf.png",
+      code: "M도서관",
     },
     {
       title: `수강신청`,
-      img: "",
+      img: "https://img.icons8.com/bubbles/100/hand-cursor.png",
+      code: "M수강신청B일정",
+    },
+    {
+      title: `장학금`,
+      img: "https://img.icons8.com/bubbles/100/gift.png",
+      code: "M장학",
+    },
+    {
+      title: `셔틀버스`,
+      img: "https://img.icons8.com/bubbles/100/bus.png",
+      code: "M셔틀",
     },
     {
       title: `편의시설`,
-      img: "",
+      img: "https://img.icons8.com/bubbles/100/building.png",
+      code: "F편의M시설",
     },
     {
-      title: `캠퍼스맵`,
-      img: "",
+      title: `등록금`,
+      img: "https://img.icons8.com/bubbles/100/money.png",
+      code: "",
+    },
+    {
+      title: `학사일정`,
+      img: "https://img.icons8.com/bubbles/100/ical.png",
+      code: "",
+    },
+    {
+      title: `증명서`,
+      img: "https://img.icons8.com/bubbles/100/documents.png",
+      code: "M증명B발급",
     },
   ],
 };
