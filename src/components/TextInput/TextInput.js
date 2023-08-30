@@ -14,6 +14,7 @@ const TextInput = (props) => {
       theme={{
         token: {
           colorPrimary: colors.chatbot_main,
+          fontFamily: "Hahmlet",
         },
       }}
     >

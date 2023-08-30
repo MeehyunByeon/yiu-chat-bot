@@ -137,7 +137,18 @@ const Main = (props) => {
       text: `${title}에 대해 알려주세요.`,
     };
     setChatList([...chatList, chat]);
-    dispatch(req_code(code));
+    dispatch(req_code({ question: answer["code"], code: code }));
+  };
+
+  // Child Component에서 사용하는 code api 발동 함수
+  const request_code_autocomplete = (title, code) => {
+    const chat = {
+      who: "client",
+      text: title,
+    };
+    setChatMsg("");
+    setChatList([...chatList, chat]);
+    dispatch(req_code({ question: title, code: code }));
   };
 
   const handleAskInputChange = (event) => {
@@ -179,7 +190,9 @@ const Main = (props) => {
         {suggestions.map((suggestion, index) => (
           <div
             key={index}
-            onClick={() => handleSuggestionClick(suggestion.code)}
+            onClick={() =>
+              request_code_autocomplete(suggestion.question, suggestion.code)
+            }
             style={{
               fontSize: 14,
               fontWeight: "bold",

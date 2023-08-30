@@ -46,11 +46,10 @@ const WelcomeMsg = (props) => {
                 borderRadius: 10,
                 cursor: "pointer",
               }}
+              onClick={() => props.sendCode(item.title, item.code)}
             >
-              {console.log()}
-              <Avatar
+              <img
                 src={item.img}
-                size={"large"}
                 style={{
                   width: 60,
                   height: 60,
