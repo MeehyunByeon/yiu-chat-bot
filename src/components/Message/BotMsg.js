@@ -6,7 +6,7 @@ import styles from "./message.module.css";
 import { colors } from "../../assets/colors";
 
 const BotMsg = (props) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(true);
   const [numPages, setNumPages] = useState(null); // 총 페이지수
   const [pageNumber, setPageNumber] = useState(1); // 현재 페이지
   const [pageScale, setPageScale] = useState(1); // 페이지 스케일

@@ -46,7 +46,7 @@ const WelcomeMsg = (props) => {
                 borderRadius: 10,
                 cursor: "pointer",
               }}
-              onClick={() => props.sendCode(item.title, item.code)}
+              onClick={() => props.sendCode_welcome(item.title, item.code)}
             >
               <img
                 src={item.img}

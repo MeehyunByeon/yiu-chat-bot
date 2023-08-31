@@ -10,7 +10,11 @@ const ChatBotMsg = (props) => {
   return (
     <div style={{ maxWidth: "70%" }}>
       {props.data.greeting ? (
-        <WelcomeMsg sendCode={(title, link) => props.sendCode(title, link)} />
+        <WelcomeMsg
+          sendCode_welcome={(title, link) =>
+            props.sendCode_welcome(title, link)
+          }
+        />
       ) : (
         <BotMsg
           data={props.data}

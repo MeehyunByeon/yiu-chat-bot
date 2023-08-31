@@ -10,13 +10,27 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/$
 
 const PDF_Viewer = (props) => {
   const [numPages, setNumPages] = useState(null); // 총 페이지수
-  const [pageNumber, setPageNumber] = useState(parseInt(props.pageNumber)); // 현재 페이지
+  // const [pageNumber, setPageNumber] = useState(parseInt(props.pageNumber)); // 현재 페이지
+  const [pageNumber, setPageNumber] = useState("13"); // 현재 페이지
+  const [pages, setPages] = useState([]);
   const [pageScale, setPageScale] = useState(1.5); // 페이지 스케일
 
   function onDocumentLoadSuccess({ numPages }) {
     console.log(`numPages ${numPages}`);
     setNumPages(numPages);
   }
+
+  useEffect(() => {}, []);
+
+  useEffect(() => {
+    splitPdfPages();
+  }, [pageNumber]);
+
+  const splitPdfPages = () => {
+    const result = pageNumber.split(", ");
+    console.log("split: ", result);
+    setPages(result);
+  };
 
   return (
     <div>
@@ -29,7 +43,10 @@ const PDF_Viewer = (props) => {
         }}
       >
         <Document file={pdf} onLoadSuccess={onDocumentLoadSuccess}>
-          <Page
+          {pages.map((page) => (
+            <Page pageNumber={parseInt(page)} />
+          ))}
+          {/* <Page
             // width={1024}
             // height={500}
             renderAnnotationLayer={false}
@@ -37,10 +54,10 @@ const PDF_Viewer = (props) => {
             scale={pageScale}
             pageNumber={pageNumber}
             className={styles.container}
-          />
+          /> */}
         </Document>
       </div>
-      {/* <div>
+      <div>
         <p>
           Page {pageNumber} of {numPages}
         </p>
@@ -82,7 +99,7 @@ const PDF_Viewer = (props) => {
           {" "}
           -
         </button>
-      </div> */}
+      </div>
     </div>
   );
 };

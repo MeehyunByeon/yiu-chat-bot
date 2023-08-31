@@ -49,7 +49,7 @@ const Main = (props) => {
   const answer = useSelector((state) => state.Main.answer);
   const ask = useSelector((state) => state.Main.ask);
 
-  const [open, setOpen] = useState(false); // drawer on/off
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false); // drawer on/off
   const [askText, setAskText] = useState(""); // ask 질문
   const [chatList, setChatList] = useState([]); // 채팅 리스트
   const [chatMsg, setChatMsg] = useState(""); // Client 채팅 실시간 저장
@@ -62,16 +62,6 @@ const Main = (props) => {
   const [numPages, setNumPages] = useState(null); // 총 페이지수
   const [pageNumber, setPageNumber] = useState(1); // 현재 페이지
   const [pageScale, setPageScale] = useState(1); // 페이지 스케일
-
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
 
   const [messageApi, contextHolder] = message.useMessage();
 
@@ -141,6 +131,17 @@ const Main = (props) => {
   };
 
   // Child Component에서 사용하는 code api 발동 함수
+  const request_code_welcome = (title, code) => {
+    const text = `${title}에 대해 알려주세요.`;
+    const chat = {
+      who: "client",
+      text: text,
+    };
+    setChatList([...chatList, chat]);
+    dispatch(req_code({ question: text, code: code }));
+  };
+
+  // Child Component에서 사용하는 code api 발동 함수
   const request_code_autocomplete = (title, code) => {
     const chat = {
       who: "client",
@@ -160,7 +161,7 @@ const Main = (props) => {
     setAskTF(!asktf);
     dispatch(req_ask(askText));
     setAskText("");
-    setOpen(false);
+    setIsDrawerOpen(false);
   };
 
   // 자동완성
@@ -230,7 +231,7 @@ const Main = (props) => {
         className={styles.header}
         style={{ backgroundColor: colors.chatbot_main, alignItems: "center" }}
       >
-        <Header onClick={() => setOpen(true)} />
+        <Header onClick={() => setIsDrawerOpen(true)} />
       </div>
       <Container style={{ marginTop: 100, marginBottom: 100 }}>
         {chatList &&
@@ -263,6 +264,9 @@ const Main = (props) => {
                   <ChatBotMsg
                     data={item}
                     sendCode={(title, code) => request_code(title, code)}
+                    sendCode_welcome={(title, code) =>
+                      request_code_welcome(title, code)
+                    }
                   />
                 </div>
               );
@@ -378,14 +382,14 @@ const Main = (props) => {
         // maskStyle={{ backgroundColor: "red" }}
         mask={false}
         // maskClosable={true}
-        onClose={() => setOpen(false)}
-        open={open}
+        onClose={() => setIsDrawerOpen(false)}
+        open={isDrawerOpen}
         bodyStyle={{
           paddingBottom: 80,
         }}
         extra={
           <Space>
-            <Button onClick={() => setOpen(false)}>취소</Button>
+            <Button onClick={() => setIsDrawerOpen(false)}>취소</Button>
             <Button
               onClick={() => sendAsk()}
               type="primary"

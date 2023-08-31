@@ -1,15 +1,15 @@
 export const autocomplete_data = [
   {
     code: "F가상M강좌",
-    question: "가상강좌에 대하여 알려주세요. ",
+    question: "가상강좌에 대해 알려주세요. ",
   },
   {
     code: "F가상M강좌",
-    question: "가상강좌에 수강 방법에 대하여 알려주세요. ",
+    question: "가상강좌에 수강 방법에 대해 알려주세요. ",
   },
   {
     code: "F가상M강좌",
-    question: "가상강좌에 수강신청 방법에 대하여 알려주세요. ",
+    question: "가상강좌에 수강신청 방법에 대해 알려주세요. ",
   },
   {
     code: "F교필M영어",
@@ -21,11 +21,11 @@ export const autocomplete_data = [
   },
   {
     code: "F교필M영어",
-    question: "교양필수 영어 교과목에 대하여 알려주세요.",
+    question: "교양필수 영어 교과목에 대해 알려주세요.",
   },
   {
     code: "F군M휴학",
-    question: "군입대 휴학에 대하여 알려주세요.",
+    question: "군입대 휴학에 대해 알려주세요.",
   },
   {
     code: "F군M휴학",
@@ -33,31 +33,31 @@ export const autocomplete_data = [
   },
   {
     code: "F복수M전공B신청",
-    question: "부전공 신청방법에 대하여 알려주세요.",
+    question: "부전공 신청방법에 대해 알려주세요.",
   },
   {
     code: "F복수M전공B신청",
-    question: "연계전공 신청 방법에 대하여 알려주세요.",
+    question: "연계전공 신청 방법에 대해 알려주세요.",
   },
   {
     code: "F복수M전공B포기",
-    question: "복수전공 신청 방법에 대하여 알려주세요.",
+    question: "복수전공 신청 방법에 대해 알려주세요.",
   },
   {
     code: "F복수M전공B포기",
-    question: "복수전공 신청포기 방법에 대하여 알려주세요.",
+    question: "복수전공 신청포기 방법에 대해 알려주세요.",
   },
   {
     code: "F복수M전공B포기",
-    question: "복수전공에 대하여 알려주세요.",
+    question: "복수전공에 대해 알려주세요.",
   },
   {
     code: "F복수M전공B포기",
-    question: "부전공 신청포기 방법에 대하여 알려주세요.",
+    question: "부전공 신청포기 방법에 대해 알려주세요.",
   },
   {
     code: "F복수M전공B포기",
-    question: "연계전공 신청포기 방법에 대하여 알려주세요.",
+    question: "연계전공 신청포기 방법에 대해 알려주세요.",
   },
   {
     code: "F스터디M룸",
@@ -77,29 +77,28 @@ export const autocomplete_data = [
   },
   {
     code: "F케이M씨유",
-    question:
-      "KCU컨소시엄(한국대학가상교육연합) 수강 방법에 대하여 알려주세요.",
+    question: "KCU컨소시엄(한국대학가상교육연합) 수강 방법에 대해 알려주세요.",
   },
   {
     code: "F케이M씨유",
     question:
-      "KCU컨소시엄(한국대학가상교육연합) 수강신청 방법에 대하여 알려주세요.",
+      "KCU컨소시엄(한국대학가상교육연합) 수강신청 방법에 대해 알려주세요.",
   },
   {
     code: "F케이M씨유",
-    question: "KCU컨소시엄(한국대학가상교육연합)에 대하여 알려주세요.",
+    question: "KCU컨소시엄(한국대학가상교육연합)에 대해 알려주세요.",
   },
   {
     code: "M교류",
-    question: "경인지역 학점교류 수강신청 시 유의사항에 대하여 알려주세요.",
+    question: "경인지역 학점교류 수강신청 시 유의사항에 대해 알려주세요.",
   },
   {
     code: "M교류",
-    question: "경인지역 학점교류 신청절차에 대하여 알려주세요.",
+    question: "경인지역 학점교류 신청절차에 대해 알려주세요.",
   },
   {
     code: "M교류",
-    question: "경인지역 학점교류에 대하여 알려주세요.",
+    question: "경인지역 학점교류에 대해 알려주세요.",
   },
   {
     code: "M교류",
@@ -111,7 +110,7 @@ export const autocomplete_data = [
   },
   {
     code: "M교선",
-    question: "교양선택에 대하여 알려주세요.",
+    question: "교양선택에 대해 알려주세요.",
   },
   {
     code: "M교필",
@@ -119,7 +118,7 @@ export const autocomplete_data = [
   },
   {
     code: "M군사학",
-    question: "군사학 교과목에 대하여 알려주세요.",
+    question: "군사학 교과목에 대해 알려주세요.",
   },
   {
     code: "M기념품",
@@ -127,7 +126,7 @@ export const autocomplete_data = [
   },
   {
     code: "M논문B졸업",
-    question: "졸업논문에 대하여 알려주세요.",
+    question: "졸업논문에 대해 알려주세요.",
   },
   {
     code: "M복학",
@@ -135,7 +134,7 @@ export const autocomplete_data = [
   },
   {
     code: "M복학",
-    question: "복학에 대하여 알려주세요.",
+    question: "복학에 대해 알려주세요.",
   },
   {
     code: "M복학B신청",
@@ -163,7 +162,7 @@ export const autocomplete_data = [
   },
   {
     code: "M수강신청B유의사항",
-    question: "수강신청 유의사항에 대하여 알려주세요.",
+    question: "수강신청 유의사항에 대해 알려주세요.",
   },
   {
     code: "M수강신청B일정",
@@ -179,23 +178,23 @@ export const autocomplete_data = [
   },
   {
     code: "M수강신청B절차",
-    question: "수강신청 절차에 대하여 알러주세요",
+    question: "수강신청 절차에 대해 알러주세요",
   },
   {
     code: "M수업B시간",
-    question: "수업시간에 대하여 알려주세요.",
+    question: "수업시간에 대해 알려주세요.",
   },
   {
     code: "M씨유",
-    question: "OCU(열린사이버대학) 수강 방법에 대하여 알려주세요.",
+    question: "OCU(열린사이버대학) 수강 방법에 대해 알려주세요.",
   },
   {
     code: "M씨유",
-    question: "OCU(열린사이버대학) 수강신청에 대하여 알려주세요.",
+    question: "OCU(열린사이버대학) 수강신청에 대해 알려주세요.",
   },
   {
     code: "M씨유",
-    question: "OCU(열린사이버대학)에 대하여 알려주세요.",
+    question: "OCU(열린사이버대학)에 대해 알려주세요.",
   },
   {
     code: "M안경점",
@@ -227,15 +226,15 @@ export const autocomplete_data = [
   },
   {
     code: "M재수강",
-    question: "재수강(재이수)에 대하여 안내해주세요.",
+    question: "재수강(재이수)에 대해 안내해주세요.",
   },
   {
     code: "M재수강",
-    question: "재수강 할 수 있는 조건에 대하여 알려주세요.",
+    question: "재수강 할 수 있는 조건에 대해 알려주세요.",
   },
   {
     code: "M제적",
-    question: "제적에 대하여 알려주세요.",
+    question: "제적에 대해 알려주세요.",
   },
   {
     code: "M조기졸업",
@@ -275,7 +274,7 @@ export const autocomplete_data = [
   },
   {
     code: "M학군단",
-    question: "학군단에 대하여 알려주세요.",
+    question: "학군단에 대해 알려주세요.",
   },
   {
     code: "M학생증",
@@ -295,7 +294,7 @@ export const autocomplete_data = [
   },
   {
     code: "M학점B세이브",
-    question: "학점세이브에 대하여 알려주세요.",
+    question: "학점세이브에 대해 알려주세요.",
   },
   {
     code: "M학점B세이브",
@@ -307,7 +306,7 @@ export const autocomplete_data = [
   },
   {
     code: "M휴학",
-    question: "일반휴학에 대하여 알려주세요.",
+    question: "일반휴학에 대해 알려주세요.",
   },
   {
     code: "M휴학B신청",
