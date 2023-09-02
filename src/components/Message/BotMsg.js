@@ -1,4 +1,6 @@
 import React, { Component, useState } from "react";
+import { useMediaQuery } from "react-responsive";
+
 import { Card, List, Avatar, Space, Modal } from "antd";
 import PDF_Viewer from "../PDF_Viewer/PdfViewer";
 
@@ -6,7 +8,12 @@ import styles from "./message.module.css";
 import { colors } from "../../assets/colors";
 
 const BotMsg = (props) => {
-  const [isModalOpen, setIsModalOpen] = useState(true);
+  const isDesktopOrLaptop = useMediaQuery({ minWidth: 992 });
+  const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 991 });
+  const isMobile = useMediaQuery({ maxWidth: 767 });
+  const isNotMobile = useMediaQuery({ minWidth: 768 });
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [numPages, setNumPages] = useState(null); // 총 페이지수
   const [pageNumber, setPageNumber] = useState(1); // 현재 페이지
   const [pageScale, setPageScale] = useState(1); // 페이지 스케일

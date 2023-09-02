@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useMediaQuery } from "react-responsive";
 
 import { List, Avatar, Space, Row, Col, message, Switch } from "antd";
 import { pdfjs, Document, Page } from "react-pdf";
@@ -9,6 +10,11 @@ import styles from "./pdfviewer.module.css";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 const PDF_Viewer = (props) => {
+  const isDesktopOrLaptop = useMediaQuery({ minWidth: 992 });
+  const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 991 });
+  const isMobile = useMediaQuery({ maxWidth: 767 });
+  const isNotMobile = useMediaQuery({ minWidth: 768 });
+
   const [numPages, setNumPages] = useState(null); // 총 페이지수
   // const [pageNumber, setPageNumber] = useState(parseInt(props.pageNumber)); // 현재 페이지
   const [pageNumber, setPageNumber] = useState("13"); // 현재 페이지

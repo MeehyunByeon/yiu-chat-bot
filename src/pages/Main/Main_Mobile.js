@@ -43,7 +43,7 @@ import { autocomplete_data } from "../../assets/data/autocomplete_data";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
-const Main = (props) => {
+const Main_Mobile = (props) => {
   // 리덕스
   const dispatch = useDispatch();
   const answer = useSelector((state) => state.Main.answer);
@@ -377,7 +377,7 @@ const Main = (props) => {
       </div>
       <Drawer
         placement={"right"}
-        title="질문 제출하기"
+        title="원하는 답변을 얻지 못했나요?"
         width={720}
         // maskStyle={{ backgroundColor: "red" }}
         mask={false}
@@ -386,7 +386,6 @@ const Main = (props) => {
         open={isDrawerOpen}
         bodyStyle={{
           paddingBottom: 80,
-          fontSize: 13,
         }}
         extra={
           <Space>
@@ -449,4 +448,4 @@ const Main = (props) => {
   );
 };
 
-export default Main;
+export default Main_Mobile;

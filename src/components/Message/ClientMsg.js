@@ -1,9 +1,15 @@
 import React, { Component } from "react";
+import { useMediaQuery } from "react-responsive";
 
 import styles from "./message.module.css";
 import { colors } from "../../assets/colors";
 
 const ClientMsg = (props) => {
+  const isDesktopOrLaptop = useMediaQuery({ minWidth: 992 });
+  const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 991 });
+  const isMobile = useMediaQuery({ maxWidth: 767 });
+  const isNotMobile = useMediaQuery({ minWidth: 768 });
+
   return (
     <div
       style={{

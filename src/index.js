@@ -27,7 +27,8 @@ const createStoreWithMiddleware = createStore(
 );
 
 // axios.defaults.baseURL = process.env.REACT_APP_API_URL;
-axios.defaults.baseURL = "http://localhost:3000";
+// axios.defaults.baseURL = "http://localhost:3000";
+axios.defaults.baseURL = process.env.REACT_APP_MY_HOME;
 axios.defaults.withCredentials = true;
 // console.log("스토어의 상태: ", createStoreWithMiddleware.getState());
 ReactDOM.render(

@@ -22,7 +22,7 @@ const Header = (props) => {
         justifyContent: "space-between",
       }}
     >
-      <div></div>
+      <div style={{ marginLeft: 20 }}></div>
       <h3 style={{ color: colors.white, textAlign: "center" }}>
         용인대학교 챗봇
       </h3>
