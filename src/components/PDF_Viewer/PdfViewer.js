@@ -3,7 +3,7 @@ import { useMediaQuery } from "react-responsive";
 
 import { List, Avatar, Space, Row, Col, message, Switch } from "antd";
 import { pdfjs, Document, Page } from "react-pdf";
-import pdf from "./yiu_info.pdf";
+import pdf from "./yiu_info_2.pdf";
 
 import styles from "./pdfviewer.module.css";
 
