@@ -112,7 +112,7 @@ const BotMsg = (props) => {
   return (
     <div
       style={{
-        fontSize: 14,
+        fontSize: 13,
         color: colors.fontColor,
         whiteSpace: "pre-line",
         fontWeight: "bold",
