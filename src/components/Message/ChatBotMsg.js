@@ -16,7 +16,7 @@ const ChatBotMsg = (props) => {
   return (
     <div
       style={{
-        maxWidth: isMobile ? "100%" : "70%",
+        maxWidth: "100%",
       }}
     >
       {props.data.greeting ? (

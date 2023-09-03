@@ -1,5 +1,7 @@
 .container {
-  margin-top: 50;
+  max-height: 1000vh; /* 증요! 건들지 마시오!*/
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 .header {
@@ -11,6 +13,7 @@
   align-content: center;
   display: flex;
   justify-content: center;
+  overflow-y: hidden;
 }
 
 .footer {

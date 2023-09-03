@@ -226,14 +226,17 @@ const Main = (props) => {
 
   return (
     <div>
-      {contextHolder}
+      {/* {contextHolder} */}
       <div
         className={styles.header}
         style={{ backgroundColor: colors.chatbot_main, alignItems: "center" }}
       >
         <Header onClick={() => setIsDrawerOpen(true)} />
       </div>
-      <Container style={{ marginTop: 100, marginBottom: 100 }}>
+      <Container
+        className={styles.container}
+        style={{ paddingTop: 100, paddingBottom: 100 }}
+      >
         {chatList &&
           chatList.map((item, index) => {
             if (item.who === "bot") {

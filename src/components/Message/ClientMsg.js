@@ -14,7 +14,7 @@ const ClientMsg = (props) => {
     <div
       style={{
         whiteSpace: "pre-line",
-        maxWidth: "30%",
+        maxWidth: isMobile ? "70vw" : "30vw",
         backgroundColor: colors.yiu_orange_light,
         borderRadius: 10,
         fontWeight: "bold",

@@ -1,3 +1,11 @@
 .menuBtn:hover {
   cursor: pointer;
 }
+
+.container {
+  -ms-overflow-style: none;
+}
+
+.container::-webkit-scrollbar {
+  display: none;
+}

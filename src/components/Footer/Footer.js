@@ -8,9 +8,10 @@ import TextInput from "../TextInput/TextInput";
 const Footer = () => {
   return (
     <Row
+      className={styles.container}
       justify={"center"}
       style={{
-        width: "100%",
+        width: "100vw",
         alignContent: "center",
         marginLeft: 10,
         marginRight: 10,

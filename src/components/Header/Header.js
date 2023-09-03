@@ -15,8 +15,9 @@ const Header = (props) => {
 
   return (
     <div
+      className={styles.container}
       style={{
-        width: "100%",
+        width: "100vw",
         display: "flex",
         flexDirection: "row",
         justifyContent: "space-between",

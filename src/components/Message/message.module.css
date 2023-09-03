@@ -8,3 +8,12 @@
   color: white;
   cursor: pointer;
 }
+
+.dragging {
+  user-select: all;
+  cursor: default;
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}

@@ -2,3 +2,11 @@
   font-size: 1.2em;
   font-weight: bold;
 }
+
+.container {
+  -ms-overflow-style: none;
+}
+
+.container::-webkit-scrollbar {
+  display: none;
+}
