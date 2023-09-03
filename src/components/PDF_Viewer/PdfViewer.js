@@ -3,6 +3,7 @@ import { useMediaQuery } from "react-responsive";
 
 import { List, Avatar, Space, Row, Col, message, Switch } from "antd";
 import { pdfjs, Document, Page } from "react-pdf";
+import ScrollContainer from "react-indiana-drag-scroll";
 import pdf from "./yiu_info_2.pdf";
 
 import styles from "./pdfviewer.module.css";
@@ -15,18 +16,18 @@ const PDF_Viewer = (props) => {
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const isNotMobile = useMediaQuery({ minWidth: 768 });
 
-  const [numPages, setNumPages] = useState(null); // 총 페이지수
+  const [numPages, setNumPages] = useState(0); // 총 페이지수
   // const [pageNumber, setPageNumber] = useState(parseInt(props.pageNumber)); // 현재 페이지
-  const [pageNumber, setPageNumber] = useState("13"); // 현재 페이지
+  const [pageNumber, setPageNumber] = useState(props.pageNumber); // 현재 페이지
   const [pages, setPages] = useState([]);
-  const [pageScale, setPageScale] = useState(1.5); // 페이지 스케일
+  const [pageScale, setPageScale] = useState(0.8); // 페이지 스케일
 
-  function onDocumentLoadSuccess({ numPages }) {
-    console.log(`numPages ${numPages}`);
-    setNumPages(numPages);
-  }
+  // function onDocumentLoadSuccess({ numPages }) {
+  //   console.log(`numPages ${numPages}`);
+  //   setNumPages(numPages);
+  // }
 
-  useEffect(() => {}, []);
+  // useEffect(() => {}, []);
 
   useEffect(() => {
     splitPdfPages();
@@ -36,23 +37,75 @@ const PDF_Viewer = (props) => {
     const result = pageNumber.split(", ");
     console.log("split: ", result);
     setPages(result);
+    setNumPages(result.length);
   };
 
   return (
     <div>
-      <div
+      <button
+        onClick={() => {
+          setPageScale(pageScale === 3 ? 3 : pageScale + 0.1);
+        }}
+        className={styles.zoomBtn}
+      >
+        + 확대
+      </button>
+      <button
+        onClick={() => {
+          setPageScale(pageScale - 0.1 < 0.5 ? 0.5 : pageScale - 0.1);
+        }}
+        className={styles.zoomBtn}
+      >
+        - 축소
+      </button>
+      <ScrollContainer
         style={{
-          // overflow: "auto",
+          // width: "100vw",
           display: "flex",
-          justifyContent: "center",
-          // backgroundColor: "red",
+          flexDirection: "row",
+          // paddingRight: 30,
+          // marginRight: 10,
+        }}
+        draggingClassName={styles.dragging}
+        activationDistance={5}
+      >
+        {pages.map((page) => (
+          <div
+            style={
+              {
+                // display: "flex",
+                // justifyContent: "center",
+              }
+            }
+          >
+            <Document
+              file={pdf}
+              // onLoadSuccess={onDocumentLoadSuccess}
+            >
+              <Page
+                pageNumber={parseInt(page)}
+                className={styles.page}
+                wrap={false}
+                // width={1024}
+                // height={500}
+                renderAnnotationLayer={false}
+                renderTextLayer={false}
+                scale={pageScale}
+                // loading={"PDF 로딩중"}
+              />
+            </Document>
+          </div>
+        ))}
+      </ScrollContainer>
+      <p
+        style={{
+          textAlign: "center",
+          fontWeight: "bold",
         }}
       >
-        <Document file={pdf} onLoadSuccess={onDocumentLoadSuccess}>
-          {pages.map((page) => (
-            <Page pageNumber={parseInt(page)} />
-          ))}
-          {/* <Page
+        total {numPages} page
+      </p>
+      {/* <Page
             // width={1024}
             // height={500}
             renderAnnotationLayer={false}
@@ -61,9 +114,7 @@ const PDF_Viewer = (props) => {
             pageNumber={pageNumber}
             className={styles.container}
           /> */}
-        </Document>
-      </div>
-      <div>
+      {/* <div>
         <p>
           Page {pageNumber} of {numPages}
         </p>
@@ -105,7 +156,7 @@ const PDF_Viewer = (props) => {
           {" "}
           -
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };

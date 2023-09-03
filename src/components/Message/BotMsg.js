@@ -69,7 +69,6 @@ const BotMsg = (props) => {
           wordBreak: "break-all",
           marginRight: 50,
         }}
-        className
         draggingClassName={styles.dragging}
         activationDistance={5}
       >
@@ -127,7 +126,7 @@ const BotMsg = (props) => {
         open={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
-        width={"50vw"}
+        width={isMobile ? "100vw" : "50vw"}
         footer={null}
       >
         <PDF_Viewer pageNumber={pageNumber} />
