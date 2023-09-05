@@ -39,7 +39,9 @@ import Header from "../../components/Header/Header";
 import styles from "./main.module.css";
 import { colors } from "../../assets/colors";
 import { welcome_msg } from "../../assets/data/welcome_msg";
+import { no_answer_msg } from "../../assets/data/no_answer_msg";
 import { autocomplete_data } from "../../assets/data/autocomplete_data";
+import iconImage from "../../assets/images/yiu_안뇽이.jpg";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
@@ -101,7 +103,10 @@ const Main = (props) => {
 
   // answer 새롭게 받을 때마다
   useEffect(() => {
-    if (answer) setChatList([...chatList, answer]);
+    if (answer) {
+      if (answer == 404) sendNoAnswer();
+      else setChatList([...chatList, answer]);
+    }
   }, [answer]);
 
   // ask 새롭게 받을 때마다
@@ -109,6 +114,12 @@ const Main = (props) => {
     if (ask === 200) successMsg("질문 제출에 성공했습니다.");
     else if (ask === false) ErrorMsg(`잠시 후에 다시 시도해주세요!`);
   }, [ask, asktf]);
+
+  // answer이 없을 때의 답변
+  const sendNoAnswer = () => {
+    setChatMsg("");
+    setChatList([...chatList, no_answer_msg]);
+  };
 
   const addClientChat = () => {
     const chat = {
@@ -254,12 +265,11 @@ const Main = (props) => {
                     size={"large"}
                     style={{ marginRight: 20 }}
                   /> */}
-                  <FontAwesomeIcon
-                    icon={faRobot}
-                    size={"2x"}
-                    color={colors.chatbot_main}
+                  <img
+                    src={iconImage}
                     style={{
-                      backgroundColor: colors.white,
+                      width: "50px",
+                      height: "50px",
                       borderRadius: 50,
                       marginRight: 20,
                     }}

@@ -91,13 +91,13 @@ const BotMsg = (props) => {
                 }}
               >
                 <p>{item.text}</p>
-                {item.btnType1 === 0 || item.btnType1 === "None"
+                {item.btnType1 === 0 || item.btnTitle1 == "NULL"
                   ? null
                   : showButton(item.btnType1, item.btnTitle1, item.btnLink1)}
-                {item.btnType2 === 0 || item.btnType2 === "None"
+                {item.btnType2 === 0 || item.btnTitle2 == "NULL"
                   ? null
                   : showButton(item.btnType2, item.btnTitle2, item.btnLink2)}
-                {item.btnType3 === 0 || item.btnType3 === "None"
+                {item.btnType3 === 0 || item.btnTitle3 == "NULL"
                   ? null
                   : showButton(item.btnType3, item.btnTitle3, item.btnLink3)}
               </div>
@@ -111,7 +111,7 @@ const BotMsg = (props) => {
   return (
     <div
       style={{
-        fontSize: 13,
+        fontSize: 20,
         color: colors.fontColor,
         whiteSpace: "pre-line",
         fontWeight: "bold",

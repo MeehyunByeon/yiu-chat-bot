@@ -63,7 +63,7 @@ const WelcomeMsg = (props) => {
               onClick={() => props.sendCode_welcome(item.title, item.code)}
             >
               <img
-                src={item.img}
+                src={item.img.toString()}
                 style={{
                   width: 60,
                   height: 60,

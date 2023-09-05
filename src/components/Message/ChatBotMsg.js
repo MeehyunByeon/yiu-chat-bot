@@ -6,6 +6,7 @@ import { colors } from "../../assets/colors";
 
 import WelcomeMsg from "./WelcomeMsg";
 import BotMsg from "./BotMsg";
+import NoAnswerMsg from "./NoAnswerMsg";
 
 const ChatBotMsg = (props) => {
   const isDesktopOrLaptop = useMediaQuery({ minWidth: 992 });
@@ -25,6 +26,8 @@ const ChatBotMsg = (props) => {
             props.sendCode_welcome(title, link)
           }
         />
+      ) : props.data.msg ? (
+        <NoAnswerMsg />
       ) : (
         <BotMsg
           data={props.data}
