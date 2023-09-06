@@ -42,6 +42,7 @@ import { welcome_msg } from "../../assets/data/welcome_msg";
 import { no_answer_msg } from "../../assets/data/no_answer_msg";
 import { autocomplete_data } from "../../assets/data/autocomplete_data";
 import iconImage from "../../assets/images/yiu_안뇽이.jpg";
+import { isMobile } from "react-device-detect";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
@@ -268,8 +269,8 @@ const Main = (props) => {
                   <img
                     src={iconImage}
                     style={{
-                      width: "50px",
-                      height: "50px",
+                      width: isMobile ? "35px" : "50px",
+                      height: isMobile ? "35px" : "50px",
                       borderRadius: 50,
                       marginRight: 20,
                     }}

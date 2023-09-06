@@ -65,8 +65,8 @@ const WelcomeMsg = (props) => {
               <img
                 src={item.img.toString()}
                 style={{
-                  width: 60,
-                  height: 60,
+                  width: isMobile ? 40 : 60,
+                  height: isMobile ? 40 : 60,
                   backgroundColor: "transparent",
                   color: colors.chatbot_main,
                 }}
@@ -74,7 +74,7 @@ const WelcomeMsg = (props) => {
               <p
                 style={{
                   fontWeight: "bold",
-                  fontSize: 14,
+                  fontSize: isMobile ? 12 : 14,
                   margin: 3,
                 }}
               >
