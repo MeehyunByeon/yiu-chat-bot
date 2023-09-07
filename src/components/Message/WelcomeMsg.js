@@ -26,10 +26,6 @@ const WelcomeMsg = (props) => {
         color: colors.fontColor,
       }}
     >
-      {/* {console.log("isDesktopOrLaptop: ", isDesktopOrLaptop)}
-      {console.log("isTablet: ", isTablet)}
-      {console.log("isMobile: ", isMobile)}
-      {console.log("isNotMobile: ", isNotMobile)} */}
       <p
         style={{
           whiteSpace: "pre-line",
@@ -83,6 +79,44 @@ const WelcomeMsg = (props) => {
             </div>
           );
         })}
+      </div>
+
+      <div
+        style={{
+          display: "grid",
+          gridTemplateRows: "0.5fr ",
+          gridTemplateColumns: "0.5fr 0.5fr",
+          fontSize: 13,
+          fontWeight: "bold",
+          marginLeft: 10,
+          marginRight: 10,
+        }}
+      >
+        <p
+          style={{
+            backgroundColor: colors.white,
+            borderRadius: 10,
+            padding: 10,
+            textAlign: "center",
+            marginRight: 10,
+            cursor: "pointer",
+          }}
+          onClick={() => props.sendDeveloperMsg()}
+        >
+          용인대학교 챗봇
+        </p>
+        <p
+          style={{
+            backgroundColor: colors.white,
+            borderRadius: 10,
+            padding: 10,
+            textAlign: "center",
+            cursor: "pointer",
+          }}
+          onClick={() => props.sendChatbotTip()}
+        >
+          챗봇 안뇽이 이용TIP
+        </p>
       </div>
     </div>
   );

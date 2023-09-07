@@ -108,18 +108,28 @@ const BotMsg = (props) => {
     );
   };
 
+  // 카드 데이터가 더 있다는 메세지 표시
+  // const showModrdata = () => {
+  //   return <p style={{backgroundColor: 'white'}}>옆으로 넘기면 정보가 더 있어요!</p>;
+  // };
+
   return (
     <div
       style={{
-        fontSize: 20,
+        fontSize: 13,
         color: colors.fontColor,
         whiteSpace: "pre-line",
         fontWeight: "bold",
       }}
     >
       {props.data.top ? showCards(props.data.top) : null}
+      {/* {isMobile && props.data.top.length > 1 ? showModrdata() : null} */}
+
       {props.data.mid ? showCards(props.data.mid) : null}
+      {/* {isMobile && props.data.mid.length > 1 ? showModrdata() : null} */}
+
       {props.data.bot ? showCards(props.data.bot) : null}
+      {/* {isMobile && props.data.bot.length > 1 ? showModrdata() : null} */}
 
       <Modal
         centered

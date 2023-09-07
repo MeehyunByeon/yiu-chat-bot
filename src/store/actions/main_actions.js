@@ -34,7 +34,7 @@ export function req_client_question(data) {
       return response.data;
     })
     .catch((err) => {
-      return err.response.status;
+      return { answer: err.response.status, id: new Date() };
     });
 
   return {

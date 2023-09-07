@@ -20,7 +20,6 @@ const ClientMsg = (props) => {
         fontWeight: "bold",
         fontSize: 14,
         color: colors.fontColor,
-        marginBottom: 10,
       }}
     >
       <p style={{ paddingLeft: 15, paddingRight: 15 }}>{props.data.text}</p>

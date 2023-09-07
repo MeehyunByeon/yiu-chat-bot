@@ -43,6 +43,8 @@ import { no_answer_msg } from "../../assets/data/no_answer_msg";
 import { autocomplete_data } from "../../assets/data/autocomplete_data";
 import iconImage from "../../assets/images/yiu_안뇽이.jpg";
 import { isMobile } from "react-device-detect";
+import { developer_msg } from "../../assets/data/developer_msg";
+import { chatbot_tip } from "../../assets/data/chatbot_tip";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
@@ -105,7 +107,7 @@ const Main = (props) => {
   // answer 새롭게 받을 때마다
   useEffect(() => {
     if (answer) {
-      if (answer == 404) sendNoAnswer();
+      if (answer.answer == 404) sendNoAnswer();
       else setChatList([...chatList, answer]);
     }
   }, [answer]);
@@ -236,6 +238,14 @@ const Main = (props) => {
     setNumPages(numPages);
   }
 
+  const sendDeveloperMsg = () => {
+    setChatList([...chatList, developer_msg]);
+  };
+
+  const sendChatbotTip = () => {
+    setChatList([...chatList, chatbot_tip]);
+  };
+
   return (
     <div>
       {/* {contextHolder} */}
@@ -255,7 +265,7 @@ const Main = (props) => {
               return (
                 <div
                   style={{
-                    padding: 20,
+                    padding: isMobile ? 15 : 20,
                     display: "flex",
                     flexDirection: "row",
                     justifyContent: "flex-start",
@@ -272,7 +282,7 @@ const Main = (props) => {
                       width: isMobile ? "35px" : "50px",
                       height: isMobile ? "35px" : "50px",
                       borderRadius: 50,
-                      marginRight: 20,
+                      marginRight: isMobile ? 15 : 20,
                     }}
                   />
                   <ChatBotMsg
@@ -281,6 +291,8 @@ const Main = (props) => {
                     sendCode_welcome={(title, code) =>
                       request_code_welcome(title, code)
                     }
+                    sendDeveloperMsg={() => sendDeveloperMsg()}
+                    sendChatbotTip={() => sendChatbotTip()}
                   />
                 </div>
               );
@@ -292,7 +304,7 @@ const Main = (props) => {
                     flexDirection: "row",
                     justifyContent: "flex-end",
                     marginRight: 20,
-                    marginBottom: 20,
+                    marginBottom: isMobile ? 0 : 20,
                   }}
                 >
                   <ClientMsg data={item} />
