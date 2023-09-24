@@ -197,7 +197,7 @@ export const autocomplete_data = [
     question: "현금 자동 지급기(ATM 기기) 위치를 알려주세요.",
   },
   {
-    code: "Office365",
+    code: "OFFICE365",
     question: "졸업 후에도 Office 365 사용 가능한가요?",
   },
   {

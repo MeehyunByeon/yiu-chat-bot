@@ -27,7 +27,7 @@ export function req_client_question(data) {
       "Content-Type": "application/x-www-form-urlencoded",
     },
     data: {
-      question: data,
+      question: data.toUpperCase(),
     },
   })
     .then((response) => {
@@ -53,8 +53,8 @@ export function req_code(data) {
       "Content-Type": "application/x-www-form-urlencoded",
     },
     data: {
-      question: data.question,
-      code: data.code,
+      question: data.question.toUpperCase(),
+      code: data.code.toUpperCase(),
     },
   })
     .then((response) => {
