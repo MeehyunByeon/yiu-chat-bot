@@ -248,7 +248,7 @@ const Main = (props) => {
 
   return (
     <div>
-      {/* {contextHolder} */}
+      {contextHolder}
       <div
         className={styles.header}
         style={{ backgroundColor: colors.chatbot_main, alignItems: "center" }}
