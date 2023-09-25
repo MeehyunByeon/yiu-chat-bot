@@ -7,47 +7,47 @@ export const welcome_msg = {
     {
       title: `교내연락처`,
       img: `https://img.icons8.com/bubbles/100/phone--v2.png`,
-      code: "F학과M연락처",
+      code: "학과연락처",
     },
     {
       title: `도서관`,
       img: "https://img.icons8.com/bubbles/100/book-shelf.png",
-      code: "M도서관",
+      code: "도서관대출",
     },
     {
       title: `수강신청`,
       img: "https://img.icons8.com/bubbles/100/hand-cursor.png",
-      code: "M수강신청B일정",
+      code: "수강신청",
     },
     {
       title: `장학금`,
       img: "https://img.icons8.com/bubbles/100/gift.png",
-      code: "M장학",
+      code: "장학",
     },
     {
       title: `셔틀버스`,
       img: "https://img.icons8.com/bubbles/100/bus.png",
-      code: "M셔틀",
+      code: "셔틀",
     },
     {
       title: `편의시설`,
       img: "https://img.icons8.com/bubbles/100/building.png",
-      code: "F편의M시설",
+      code: "편의시설",
     },
     {
       title: `등록금`,
       img: "https://img.icons8.com/bubbles/100/money.png",
-      code: "",
+      code: "등록금납부",
     },
     {
       title: `학사일정`,
       img: "https://img.icons8.com/bubbles/100/ical.png",
-      code: "",
+      code: "교내일정",
     },
     {
       title: `증명서`,
       img: "https://img.icons8.com/bubbles/100/documents.png",
-      code: "M증명B발급",
+      code: "자동발급기",
     },
   ],
 };
