@@ -37,7 +37,7 @@ export const welcome_msg = {
     {
       title: `등록금`,
       img: "https://img.icons8.com/bubbles/100/money.png",
-      code: "등록금납부",
+      code: "등록금",
     },
     {
       title: `학사일정`,
