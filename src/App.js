@@ -69,7 +69,6 @@ function App() {
 
   return (
     <BrowserRouter>
-      <ScrollToTop />
       <Layout>
         {/* <div className="App">
           <header className="App-header">

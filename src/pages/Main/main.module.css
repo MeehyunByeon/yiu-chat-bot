@@ -1,5 +1,6 @@
 .container {
-  max-height: 1000vh; /* 증요! 건들지 마시오!*/
+  /* max-height: 1000vh; 증요! 건들지 마시오!*/
+  /* max-height: 1000vh; */
   overflow-x: hidden;
   overflow-y: scroll;
 }
