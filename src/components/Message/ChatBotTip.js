@@ -5,7 +5,10 @@ import { Card, List, Avatar, Space } from "antd";
 import styles from "./message.module.css";
 import { colors } from "../../assets/colors";
 
-import { chatbot_tip } from "../../assets/data/chatbot_tip";
+import {
+  chatbot_tip,
+  chatbot_tip_ver_modal,
+} from "../../assets/data/chatbot_tip";
 
 const ChatBotTip = (props) => {
   const isDesktopOrLaptop = useMediaQuery({ minWidth: 992 });
@@ -18,25 +21,40 @@ const ChatBotTip = (props) => {
   // const isRetina = useMediaQuery({ minResolution: "2dppx" });
 
   return (
-    <div
-      style={{
-        backgroundColor: colors.chatbot_main_light,
-        padding: 10,
-        borderRadius: 20,
-        color: colors.fontColor,
-      }}
-    >
+    <div style={{ padding: 15 }}>
       <p
         style={{
-          whiteSpace: "pre-line",
+          textAlign: "center",
+          fontSize: 18,
+          color: colors.chatbot_main,
           fontWeight: "bold",
-          fontSize: 14,
-          paddingLeft: 10,
-          paddingRight: 10,
+          marginTop: 20,
+          marginBottom: 30,
         }}
       >
-        {chatbot_tip}
+        용인대학교 챗봇 이용tip
       </p>
+      {chatbot_tip_ver_modal.map((item, index) => {
+        return (
+          <div
+            style={{
+              whiteSpace: "pre-line",
+              fontWeight: "bold",
+              marginBottom: 30,
+            }}
+          >
+            <span
+              style={{
+                color: colors.chatbot_main,
+                fontSize: 15,
+              }}
+            >
+              {item.title}
+            </span>
+            <p style={{ fontSize: 13 }}>{item.text}</p>
+          </div>
+        );
+      })}
     </div>
   );
 };

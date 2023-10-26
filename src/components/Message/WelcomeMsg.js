@@ -1,11 +1,12 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { useMediaQuery } from "react-responsive";
-import { Card, List, Avatar, Space } from "antd";
+import { Card, List, Avatar, Space, Modal } from "antd";
 
 import styles from "./message.module.css";
 import { colors } from "../../assets/colors";
 
 import { welcome_msg } from "../../assets/data/welcome_msg";
+import ChatBotTip from "./ChatBotTip";
 
 const WelcomeMsg = (props) => {
   const isDesktopOrLaptop = useMediaQuery({ minWidth: 992 });
@@ -16,6 +17,15 @@ const WelcomeMsg = (props) => {
   // const isTabletOrMobileDevice = useMediaQuery({ maxDeviceWidth: 1224 });
   // const isPortrait = useMediaQuery({ orientation: "portrait" });
   // const isRetina = useMediaQuery({ minResolution: "2dppx" });
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <div
@@ -113,11 +123,22 @@ const WelcomeMsg = (props) => {
             textAlign: "center",
             cursor: "pointer",
           }}
-          onClick={() => props.sendChatbotTip()}
+          // onClick={() => props.sendChatbotTip()}
+          onClick={() => setIsModalOpen(true)}
         >
           챗봇 안뇽이 이용TIP
         </p>
       </div>
+      <Modal
+        centered
+        open={isModalOpen}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        width={isMobile ? "100vw" : isTablet ? "60vw" : "35vw"}
+        footer={null}
+      >
+        <ChatBotTip />
+      </Modal>
     </div>
   );
 };
