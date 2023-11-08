@@ -7,6 +7,7 @@ import { colors } from "../../assets/colors";
 
 import { welcome_msg } from "../../assets/data/welcome_msg";
 import ChatBotTip from "./ChatBotTip";
+import DeveloperMsg from "./DeveloperMsg";
 
 const WelcomeMsg = (props) => {
   const isDesktopOrLaptop = useMediaQuery({ minWidth: 992 });
@@ -19,12 +20,14 @@ const WelcomeMsg = (props) => {
   // const isRetina = useMediaQuery({ minResolution: "2dppx" });
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalContents, setModalContents] = useState("tip");
 
   const handleOk = () => {
     setIsModalOpen(false);
   };
   const handleCancel = () => {
     setIsModalOpen(false);
+    setModalContents("tip");
   };
 
   return (
@@ -111,7 +114,11 @@ const WelcomeMsg = (props) => {
             marginRight: 10,
             cursor: "pointer",
           }}
-          onClick={() => props.sendDeveloperMsg()}
+          // onClick={() => props.sendDeveloperMsg()}
+          onClick={() => {
+            setIsModalOpen(true);
+            setModalContents("dvlp_msg");
+          }}
         >
           용인대학교 챗봇
         </p>
@@ -134,10 +141,10 @@ const WelcomeMsg = (props) => {
         open={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
-        width={isMobile ? "100vw" : isTablet ? "60vw" : "35vw"}
+        width={isMobile ? "100vw" : isTablet ? "60vw" : "40vw"}
         footer={null}
       >
-        <ChatBotTip />
+        {modalContents == "tip" ? <ChatBotTip /> : <DeveloperMsg />}
       </Modal>
     </div>
   );

@@ -18,26 +18,72 @@ const DeveloperMsg = (props) => {
   // const isRetina = useMediaQuery({ minResolution: "2dppx" });
 
   return (
-    <div
-      style={{
-        backgroundColor: colors.chatbot_main_light,
-        padding: 10,
-        borderRadius: 20,
-        color: colors.fontColor,
-      }}
-    >
+    <div style={{ padding: 15 }}>
       <p
+        style={{
+          textAlign: "center",
+          fontSize: 18,
+          color: colors.chatbot_main,
+          fontWeight: "bold",
+          marginTop: 20,
+          marginBottom: 30,
+        }}
+      >
+        용인대학교 챗봇
+      </p>
+
+      <div
         style={{
           whiteSpace: "pre-line",
           fontWeight: "bold",
+          marginBottom: 30,
           fontSize: 14,
-          paddingLeft: 10,
-          paddingRight: 10,
         }}
       >
-        {developer_msg.developer}
-      </p>
+        <p style={{ marginBottom: 30 }}>{developer_msg.developer}</p>
+
+        <span
+          style={{
+            color: colors.chatbot_main,
+            fontSize: 15,
+          }}
+        >
+          {`<AI Service Lab>`}
+        </span>
+        <p style={{ marginBottom: 30 }}>{developer_msg.link}</p>
+
+        <span
+          style={{
+            color: colors.chatbot_main,
+            fontSize: 15,
+          }}
+        >
+          {`<문의>`}
+        </span>
+        <p>{developer_msg.contact}</p>
+      </div>
     </div>
+
+    // <div
+    //   style={{
+    //     backgroundColor: colors.chatbot_main_light,
+    //     padding: 10,
+    //     borderRadius: 20,
+    //     color: colors.fontColor,
+    //   }}
+    // >
+    //   <p
+    //     style={{
+    //       whiteSpace: "pre-line",
+    //       fontWeight: "bold",
+    //       fontSize: 14,
+    //       paddingLeft: 10,
+    //       paddingRight: 10,
+    //     }}
+    //   >
+    //     {developer_msg.developer}
+    //   </p>
+    // </div>
   );
 };
 export default DeveloperMsg;
