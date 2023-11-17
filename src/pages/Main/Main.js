@@ -230,11 +230,11 @@ const Main = (props) => {
 
   //콘솔에 띄우기
   const handleSuggestionClick = (code) => {
-    console.log("Selected suggestion code:", code);
+    // console.log("Selected suggestion code:", code);
   };
 
   function onDocumentLoadSuccess({ numPages }) {
-    console.log(`numPages ${numPages}`);
+    // console.log(`numPages ${numPages}`);
     setNumPages(numPages);
   }
 

@@ -35,7 +35,7 @@ const PDF_Viewer = (props) => {
 
   const splitPdfPages = () => {
     const result = pageNumber.split(", ");
-    console.log("split: ", result);
+    // console.log("split: ", result);
     setPages(result);
     setNumPages(result.length);
   };

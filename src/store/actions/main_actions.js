@@ -45,7 +45,7 @@ export function req_client_question(data) {
 
 // 코드에 대한 답변 가져오기
 export function req_code(data) {
-  console.log("액션에서 받음: ", data);
+  // console.log("액션에서 받음: ", data);
   const request = axios({
     method: "POST",
     url: process.env.REACT_APP_GET_ANSWER_C,
