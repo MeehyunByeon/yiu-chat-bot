@@ -58,6 +58,14 @@ const PDF_Viewer = (props) => {
       >
         - 축소
       </button>
+      <p
+        style={{
+          textAlign: "center",
+          fontWeight: "bold",
+        }}
+      >
+        total {numPages} {numPages > 1 ? "pages" : "page"}
+      </p>
       <ScrollContainer
         style={{
           // width: "100vw",
@@ -97,14 +105,6 @@ const PDF_Viewer = (props) => {
           </div>
         ))}
       </ScrollContainer>
-      <p
-        style={{
-          textAlign: "center",
-          fontWeight: "bold",
-        }}
-      >
-        total {numPages} page
-      </p>
       {/* <Page
             // width={1024}
             // height={500}

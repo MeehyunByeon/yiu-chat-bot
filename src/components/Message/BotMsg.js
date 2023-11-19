@@ -138,7 +138,11 @@ const BotMsg = (props) => {
         onCancel={handleCancel}
         width={isMobile ? "100vw" : "50vw"}
         footer={null}
-        style={{ height: "90%" }}
+        style={{}}
+        bodyStyle={{
+          overflowY: "scroll",
+          maxHeight: "90vh",
+        }}
       >
         <PDF_Viewer pageNumber={pageNumber} />
       </Modal>

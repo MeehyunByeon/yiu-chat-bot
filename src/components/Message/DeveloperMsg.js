@@ -50,7 +50,14 @@ const DeveloperMsg = (props) => {
         >
           {`<AI Service Lab>`}
         </span>
-        <p style={{ marginBottom: 30 }}>{developer_msg.link}</p>
+        <div
+          style={{ marginBottom: 30, cursor: "pointer" }}
+          onClick={() =>
+            window.open(developer_msg.link, "_blank", "noopener, noreferrer")
+          }
+        >
+          {developer_msg.link}
+        </div>
 
         <span
           style={{

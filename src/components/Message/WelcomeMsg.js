@@ -143,6 +143,11 @@ const WelcomeMsg = (props) => {
         onCancel={handleCancel}
         width={isMobile ? "100vw" : isTablet ? "60vw" : "40vw"}
         footer={null}
+        style={{}}
+        bodyStyle={{
+          overflowY: "scroll",
+          maxHeight: "80vh",
+        }}
       >
         {modalContents == "tip" ? <ChatBotTip /> : <DeveloperMsg />}
       </Modal>
