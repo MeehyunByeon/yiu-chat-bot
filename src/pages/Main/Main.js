@@ -395,7 +395,7 @@ const Main = (props) => {
             onClick={() => {
               addClientChat();
             }}
-            onPressEnter={() => {
+            onKeyPress={() => {
               if (chatMsg.length > 0) addClientChat();
             }}
           />

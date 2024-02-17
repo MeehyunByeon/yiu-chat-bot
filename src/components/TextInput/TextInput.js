@@ -29,6 +29,7 @@ const TextInput = (props) => {
         maxLength={props.maxLength}
         disabled={props.disabled}
         onChange={props.onChange}
+        onKeyPress={props.onKeyPress}
         onPressEnter={props.onPressEnter}
         autoComplete="off"
         suffix={
